@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import ShoutlyLogo from "../common/ShoutlyLogo";
+import ShoutlyLogo from "@/components/common/ShoutlyLogo";
 import { Twitter, Facebook, LinkedIn, Instagram } from "@/icons";
 
 export default function Footer() {
