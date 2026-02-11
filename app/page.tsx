@@ -30,7 +30,7 @@ export default function LandingPage() {
                     <div className="flex items-center gap-2">
                         <div className="w-40 h-36 relative">
                             <Image
-                                src="/images/logo.png"
+                                src="images/logo.png"
                                 alt="Shoutly.ai Logo"
                                 fill
                                 className="object-contain"
@@ -313,8 +313,8 @@ export default function LandingPage() {
                             <video
                                 ref={videoRef}
                                 className="w-full h-full object-cover"
-                                src="/videos/ai_video.mp4"
-                                poster="/images/demo.jpg"
+                                src="videos/ai_video.mp4"
+                                poster="images/demo.jpg"
                             />
 
                             {/* Play Button Overlay */}

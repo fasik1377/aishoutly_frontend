@@ -13,7 +13,7 @@ export default function CreateAccountPage() {
             {/* Logo */}
             <div className="mb-5">
                 <Image
-                    src="/images/logo.png"
+                    src="images/logo.png"
                     alt="Logo"
                     width={180}
                     height={120}
@@ -38,7 +38,7 @@ export default function CreateAccountPage() {
                     className="w-full flex items-center justify-center gap-3 border border-gray-300 rounded-xl py-3 mb-6 hover:bg-gray-50 transition"
                 >
                     <Image
-                        src="/images/google.png"
+                        src="images/google.png"
                         alt="Google"
                         width={18}
                         height={18}

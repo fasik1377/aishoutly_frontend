@@ -62,7 +62,7 @@ export default function DashboardPage() {
             {/* Sidebar */}
             <aside className="w-64 bg-white border-r px-6 py-6">
                 <Image
-                    src="/images/logo.png"
+                    src="images/logo.png"
                     alt="Logo"
                     width={140}
                     height={60}
@@ -342,7 +342,7 @@ export default function DashboardPage() {
                                                     {/* Title with image */}
                                                     <div className="flex items-center gap-2">
                                                         <img
-                                                            src="/images/holiday1.jpg" // replace with your image path
+                                                            src="images/holiday1.jpg" // replace with your image path
                                                             alt="Holiday"
                                                             className="w-5 h-5"
                                                         />
@@ -557,7 +557,7 @@ export default function DashboardPage() {
                                             <div className="relative h-28 mb-3 overflow-hidden rounded-lg">
                                                 {/* Image */}
                                                 <img
-                                                    src="/images/coffee.jpg"
+                                                    src="images/coffee.jpg"
                                                     alt="Post preview"
                                                     className="w-full h-full object-cover"
                                                 />
@@ -720,7 +720,7 @@ export default function DashboardPage() {
 
                                             {/* Image */}
                                             <img
-                                                src="/images/sport.jpg" // replace with your image path
+                                                src="images/sport.jpg" // replace with your image path
                                                 alt="Template Preview"
                                                 className="w-full h-full object-cover"
                                             />

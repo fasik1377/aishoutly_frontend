@@ -16,7 +16,7 @@ export default function CreatePasswordPage() {
             {/* Logo */}
             <div className="mb-8">
                 <Image
-                    src="/images/logo.png"
+                    src="images/logo.png"
                     alt="Logo"
                     width={180}
                     height={120}
