@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import ShoutlyLogo from "../common/ShoutlyLogo";
+import ShoutlyLogo from "@/components/common/ShoutlyLogo";
 import { UserCircleIcon } from "@/icons";
 
 export default function Header() {
@@ -34,8 +34,8 @@ export default function Header() {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? "bg-white/70 backdrop-blur-xl border-b border-gray-100 py-3"
-                    : "bg-transparent py-5"
+                ? "bg-white/70 backdrop-blur-xl border-b border-gray-100 py-3"
+                : "bg-transparent py-5"
                 }`}
         >
             <div className="max-w-7xl mx-auto px-6 sm:px-10">
@@ -54,8 +54,8 @@ export default function Header() {
                                 key={item.name}
                                 href={item.href}
                                 className={`text-sm font-bold transition-all hover:text-brand-500 ${isActive(item.href)
-                                        ? "text-brand-500"
-                                        : "text-gray-900"
+                                    ? "text-brand-500"
+                                    : "text-gray-900"
                                     }`}
                             >
                                 {item.name}
