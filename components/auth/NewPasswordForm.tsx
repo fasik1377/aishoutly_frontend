@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { EyeCloseIcon, EyeIcon } from "@/icons";
+import { Eye, EyeOff } from "lucide-react";
+
 
 export default function NewPasswordPage() {
     const router = useRouter();
@@ -90,7 +91,7 @@ export default function NewPasswordPage() {
                                 onClick={() => setShowPassword(!showPassword)}
                                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
                             >
-                                {showPassword ? <EyeIcon /> : <EyeCloseIcon />}
+                                {showPassword ? <Eye /> : <EyeOff />}
                             </button>
                         </div>
                     </div>
@@ -119,7 +120,7 @@ export default function NewPasswordPage() {
                                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
                             >
-                                {showConfirmPassword ? <EyeIcon /> : <EyeCloseIcon />}
+                                {showConfirmPassword ? <Eye /> : <EyeOff />}
                             </button>
                         </div>
                     </div>
