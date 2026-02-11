@@ -7,7 +7,8 @@ import { SparklesIcon } from "@heroicons/react/24/outline";
 import { useRef, useState } from "react";
 import IndustrySection from "@/components/IndustrySection";
 import PricingSection from "@/components/PricingSection";
-import { CheckCircleIcon, ArrowRightIcon, ShootingStarIcon, BoltIcon } from "@/icons";
+import { CheckCircle, ArrowRight, Star, Zap } from "lucide-react";
+
 import {
     FaTwitter,
     FaInstagram,

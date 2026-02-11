@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import ShoutlyLogo from "@/components/common/ShoutlyLogo";
-import { Twitter, Facebook, LinkedIn, Instagram } from "@/icons";
+import { Twitter, Facebook, Linkedin, Instagram } from "lucide-react";
+
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
@@ -54,7 +55,7 @@ export default function Footer() {
                                 <Facebook className="w-5 h-5 fill-white" />
                             </Link>
                             <Link href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-all">
-                                <LinkedIn className="w-5 h-5 fill-white" />
+                                <Linkedin className="w-5 h-5 fill-white" />
                             </Link>
                         </div>
                     </div>

@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ShoutlyLogo from "@/components/common/ShoutlyLogo";
-import { UserCircleIcon } from "@/icons";
+import { User } from "lucide-react";
+
 
 export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -76,7 +77,7 @@ export default function Header() {
                             className="flex items-center gap-2 px-2 py-2 text-gray-900 hover:text-brand-500 transition-colors"
                         >
                             <div className="w-10 h-10 border border-gray-200 rounded-xl flex items-center justify-center hover:border-brand-200 transition-all bg-white shadow-sm">
-                                <UserCircleIcon className="w-5 h-5" />
+                                <User className="w-5 h-5" />
                             </div>
                         </Link>
                     </div>
