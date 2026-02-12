@@ -20,62 +20,107 @@ import {
 export default function LandingPage() {
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
+
     return (
         <div className="bg-white dark:bg-gray-950 font-arial min-h-screen text-gray-900 dark:text-white selection:text-white">
             {/* Navigation */}
             <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200">
-                <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
 
                     {/* Logo */}
-                    <div className="flex items-center gap-2">
-                        <div className="w-40 h-36 relative">
-                            <Image
-                                src="images/logo.png"
-                                alt="Shoutly.ai Logo"
-                                fill
-                                className="object-contain"
-                                priority
-                            />
-                        </div>
-                    </div>
-                    {/* Navigation Links */}
-                    <div className="hidden md:flex items-center gap-8 text-sm font-medium text-black">
-                        <Link href="/" className="hover:text-brand-500 transition-colors">
-                            Home
-                        </Link>
-                        <Link href="#features" className="hover:text-brand-500 transition-colors">
-                            Features
-                        </Link>
-                        <Link href="#pricing" className="hover:text-brand-500 transition-colors">
-                            Pricing
-                        </Link>
-                        <Link
-                            href="#early-access"
-                            className="hover:text-brand-500 transition-colors"
-                        >
-                            Get Early Access
-                        </Link>
+                    <div className="relative w-28 h-10 sm:w-40 sm:h-14">
+                        <Image src="images/logo.png" alt="Logo" fill className="object-contain" />
                     </div>
 
-                    {/* Auth Buttons */}
-                    <div className="flex items-center gap-4">
-                        <Link
-                            href="/sign-in"
-                            className="text-sm font-medium text-black hover:text-brand-500 transition-colors hidden sm:block"
-                        >
+                    {/* Desktop Links */}
+                    <div className="hidden md:flex items-center gap-8 text-sm font-medium text-black">
+                        <Link href="/">Home</Link>
+                        <Link href="#features">Features</Link>
+                        <Link href="#pricing">Pricing</Link>
+                        <Link href="#early-access">Get Early Access</Link>
+                    </div>
+
+                    {/* Right side (Desktop only) */}
+                    <div className="hidden md:flex text-black items-center gap-4">
+                        <Link href="/sign-in" className="text-sm">
                             Log in
                         </Link>
 
                         <Link
                             href="/sign-up"
-                            className="h-10 px-6 bg-[#000000] text-white rounded-full text-xs tracking-wider flex items-center hover:opacity-80 transition-all"
+                            className="px-4 py-2 bg-black text-white rounded-full text-xs"
                         >
                             Sign Up Free
                         </Link>
                     </div>
 
+                    {/* Hamburger (Mobile only) */}
+                    <button
+                        onClick={() => setMenuOpen(!menuOpen)}
+                        className="md:hidden text-2xl text-black"
+                    >
+                        ☰
+                    </button>
                 </div>
+
+                {/* Mobile Menu */}
+                {menuOpen && (
+                    <div className="md:hidden bg-white border-t px-6 py-6 space-y-5">
+                        <Link
+                            href="/"
+                            className="block text-base text-black font-medium"
+                            onClick={() => setMenuOpen(false)}
+                        >
+                            Home
+                        </Link>
+
+                        <Link
+                            href="#features"
+                            className="block text-base text-black font-medium"
+                            onClick={() => setMenuOpen(false)}
+                        >
+                            Features
+                        </Link>
+
+                        <Link
+                            href="#pricing"
+                            className="block text-base text-black font-medium"
+                            onClick={() => setMenuOpen(false)}
+                        >
+                            Pricing
+                        </Link>
+
+                        <Link
+                            href="#early-access"
+                            className="block text-base text-black font-medium"
+                            onClick={() => setMenuOpen(false)}
+                        >
+                            Get Early Access
+                        </Link>
+
+                        {/* Divider */}
+                        <div className="border-t pt-4 space-y-3">
+                            <Link
+                                href="/sign-in"
+                                className="block text-center text-black text-sm font-medium"
+                                onClick={() => setMenuOpen(false)}
+                            >
+                                Log in
+                            </Link>
+
+                            <Link
+                                href="/sign-up"
+                                className="block text-center bg-black text-white py-3 rounded-full text-sm"
+                                onClick={() => setMenuOpen(false)}
+                            >
+                                Sign Up Free
+                            </Link>
+                        </div>
+                    </div>
+                )}
             </nav>
+
             {/* Hero Section */}
             <header className="pt-32 pb-40 px-6 relative overflow-hidden bg-white">
                 {/* Background Image with subtle floating animation */}
@@ -116,7 +161,8 @@ export default function LandingPage() {
                         className="text-5xl md:text-7xl lg:text-6xl font-normal mb-8 tracking-tight leading-[1.05]"
 
                     >
-                        <h1 className="text-5xl md:text-7xl lg:text-6xl font-normal mb-8 tracking-tight leading-[1.05]">
+                        <h1 className="text-3xl sm:text-4xl md:text-6xl font-normal mb-6 leading-tight">
+
                             {/* Generate */}
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-purple-700">
                                 Generate{" "}
@@ -154,7 +200,7 @@ export default function LandingPage() {
 
                     </motion.div>
                     {/* Action Buttons */}
-                    <div className="flex items-center justify-center gap-4 mb-6">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
 
                         {/* Try Free Button */}
                         <button
