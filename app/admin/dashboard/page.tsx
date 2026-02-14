@@ -16,7 +16,9 @@ import {
     CheckCircle, Search,
     MoreVertical,
     XCircle,
-    Ban,
+    Ban, Eye,
+    MessageCircle,
+
 } from "lucide-react";
 import { FaFacebook, FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
@@ -432,6 +434,173 @@ export default function SuperAdminDashboard() {
                         </div>
 
                     )}
+                    {activeTab === "Content Moderation" && (
+                        <div className="space-y-8">
+
+                            {/* Top Filter Buttons */}
+                            <div className="flex gap-4">
+                                <button className="px-4 py-2 border border-gray-300 bg-white text-black rounded-md">
+                                    All Content
+                                </button>
+
+                                <button className="px-4 py-2 bg-yellow-600 text-white rounded-md">
+                                    Pending Review (2)
+                                </button>
+
+                                <button className="px-4 py-2 border border-gray-300 bg-white text-black rounded-md">
+                                    Flagged (2)
+                                </button>
+                            </div>
+
+                            {/* Cards */}
+                            <div className="grid grid-cols-2 gap-8">
+
+                                {/* ================= FIRST CARD ================= */}
+                                <div className="bg-white rounded-xl shadow overflow-hidden">
+
+                                    {/* Image */}
+                                    <div className="relative">
+                                        <img
+                                            src="https://images.unsplash.com/photo-1560518883-ce09059eeffa"
+                                            className="w-full h-56 object-cover"
+                                        />
+                                        <div className="absolute top-3 right-3 bg-red-600 text-white px-3 py-1 rounded-md flex items-center gap-1 text-sm">
+                                            <AlertTriangle size={14} />
+                                            Flagged
+                                        </div>
+                                    </div>
+
+                                    <div className="p-6 space-y-4">
+
+                                        {/* User Info */}
+                                        <div className="flex justify-between items-center">
+                                            <div>
+                                                <h2 className="font-semibold text-black">James Wilson</h2>
+                                                <p className="text-sm text-gray-500">Real Estate</p>
+                                            </div>
+                                            <FaFacebook className="text-blue-600 text-xl" />
+                                        </div>
+
+                                        {/* Content */}
+                                        <div className="flex items-start gap-2 text-black">
+                                            <MessageCircle size={18} />
+                                            <p>
+                                                GET RICH QUICK! Buy now or regret forever! Limited slots! 🏠💰
+                                            </p>
+                                        </div>
+
+                                        <p className="text-gray-600 text-sm">
+                                            ##realestate #luxury #investment #money
+                                        </p>
+
+                                        {/* Flag Reason Card */}
+                                        <div className="bg-red-100 p-4 rounded-md text-red-600 text-sm space-y-2">
+                                            <p className="font-medium">Flagged for:</p>
+                                            <div className="flex items-center gap-2">
+                                                <span className="w-2 h-2 bg-red-600 rounded-full"></span>
+                                                Fake financial promises
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <span className="w-2 h-2 bg-red-600 rounded-full"></span>
+                                                Fake financial promises
+                                            </div>
+                                        </div>
+
+                                        {/* Buttons */}
+                                        {/* Buttons */}
+                                        <div className="flex gap-4">
+
+                                            <button className="flex-[7] bg-blue-100 text-blue-600 py-2 rounded-md flex items-center justify-center gap-2">
+                                                <Eye size={16} /> Review
+                                            </button>
+
+                                            <button className="flex-[1.5] bg-green-100 text-green-600 py-2 rounded-md flex justify-center">
+                                                <CheckCircle size={18} />
+                                            </button>
+
+                                            <button className="flex-[1.5] bg-red-100 text-red-600 py-2 rounded-md flex justify-center">
+                                                <XCircle size={18} />
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                {/* ================= SECOND CARD ================= */}
+                                <div className="bg-white rounded-xl shadow overflow-hidden">
+
+                                    {/* Image */}
+                                    <div className="relative">
+                                        <img
+                                            src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9"
+                                            className="w-full h-56 object-cover"
+                                        />
+                                        <div className="absolute top-3 right-3 bg-red-600 text-white px-3 py-1 rounded-md flex items-center gap-1 text-sm">
+                                            <AlertTriangle size={14} />
+                                            Flagged
+                                        </div>
+                                    </div>
+
+                                    <div className="p-6 space-y-4">
+
+                                        {/* User Info */}
+                                        <div className="flex justify-between items-center">
+                                            <div>
+                                                <h2 className="font-semibold text-black">Lisa Thompson</h2>
+                                                <p className="text-sm text-gray-500">Beauty & Spa</p>
+                                            </div>
+                                            <FaInstagram className="text-pink-500 text-xl" />
+                                        </div>
+
+                                        {/* Content */}
+                                        <div className="flex items-start gap-2 text-black">
+                                            <MessageCircle size={18} />
+                                            <p>
+                                                Unwind and relax at our exclusive spa. Wine and beauty treatments! 🍷💅
+                                            </p>
+                                        </div>
+
+                                        <p className="text-gray-600 text-sm">
+                                            ##beauty #spa #wellness #lifestyle
+                                        </p>
+
+                                        {/* Flag Reason Card */}
+                                        <div className="bg-red-100 p-4 rounded-md text-red-600 text-sm space-y-2">
+                                            <p className="font-medium">Flagged for:</p>
+                                            <div className="flex items-center gap-2">
+                                                <span className="w-2 h-2 bg-red-600 rounded-full"></span>
+                                                Alcohol reference
+                                            </div>
+                                        </div>
+
+                                        {/* Buttons */}
+                                        {/* Buttons */}
+                                        <div className="flex gap-4">
+
+                                            <button className="flex-[7] bg-blue-100 text-blue-600 py-2 rounded-md flex items-center justify-center gap-2">
+                                                <Eye size={16} /> Review
+                                            </button>
+
+                                            <button className="flex-[1.5] bg-green-100 text-green-600 py-2 rounded-md flex justify-center">
+                                                <CheckCircle size={18} />
+                                            </button>
+
+                                            <button className="flex-[1.5] bg-red-100 text-red-600 py-2 rounded-md flex justify-center">
+                                                <XCircle size={18} />
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    )}
+
 
                 </div>
             </main>
