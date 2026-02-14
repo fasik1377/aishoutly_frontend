@@ -13,8 +13,12 @@ import {
     TrendingUp,
     AlertTriangle,
     DollarSign,
-    CheckCircle,
+    CheckCircle, Search,
+    MoreVertical,
+    XCircle,
+    Ban,
 } from "lucide-react";
+import { FaFacebook, FaInstagram, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
 export default function SuperAdminDashboard() {
     const [activeTab, setActiveTab] = useState("Dashboard");
@@ -259,6 +263,176 @@ export default function SuperAdminDashboard() {
                             </div>
                         </>
                     )}
+                    {activeTab === "User Management" && (
+                        <div className="space-y-8">
+
+                            {/* Top Search + Tabs */}
+                            <div className="flex justify-between items-center">
+
+                                {/* Search */}
+                                <div className="relative w-80 bg-white">
+                                    <Search size={18} className="absolute left-3 top-3 text-gray-400" />
+                                    <input
+                                        type="text"
+                                        placeholder="Search users..."
+                                        className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                    />
+                                </div>
+
+                                {/* Filter Tabs */}
+                                <div className="bg-white p-1 rounded-lg flex gap-2">
+                                    {["All", "Active", "Suspended", "Blocked"].map((tab) => (
+                                        <button
+                                            key={tab}
+                                            className="px-4 py-1 text-sm rounded-md text-black hover:bg-purple-600 hover:text-white transition"
+                                        >
+                                            {tab}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* User Cards */}
+                            <div className="grid grid-cols-3 gap-6">
+
+                                {/* CARD COMPONENT REUSABLE STYLE */}
+                                {[
+                                    {
+                                        letter: "D",
+                                        name: "Dr. Sarah Johnson",
+                                        email: "sarah@dentalcare.com",
+                                        industry: "Dentistry",
+                                        plan: "Yearly",
+                                        posts: "124",
+                                        violations: "0",
+                                        status: "active",
+                                        platforms: ["facebook", "instagram", "linkedin"]
+                                    },
+                                    {
+                                        letter: "M",
+                                        name: "Mike Chen",
+                                        email: "mike@fitnessplus.com",
+                                        industry: "Fitness",
+                                        plan: "Monthly",
+                                        posts: "87",
+                                        violations: "1",
+                                        status: "active",
+                                        platforms: ["instagram", "x"]
+                                    },
+                                    {
+                                        letter: "E",
+                                        name: "Emily Rodriguez",
+                                        email: "emily@foodhub.com",
+                                        industry: "Restaurant",
+                                        plan: "Monthly",
+                                        posts: "156",
+                                        violations: "0",
+                                        status: "active",
+                                        platforms: ["facebook", "instagram"]
+                                    },
+                                    {
+                                        letter: "J",
+                                        name: "James Wilson",
+                                        email: "james@realestate.com",
+                                        industry: "Real Estate",
+                                        plan: "Monthly",
+                                        posts: "203",
+                                        violations: "2",
+                                        status: "suspended",
+                                        platforms: ["facebook", "instagram", "linkedin", "x"]
+                                    },
+                                    {
+                                        letter: "L",
+                                        name: "Lisa Thompson",
+                                        email: "lisa@beautybar.com",
+                                        industry: "Beauty & Spa",
+                                        plan: "Monthly",
+                                        posts: "45",
+                                        violations: "3",
+                                        status: "blocked",
+                                        platforms: ["instagram"]
+                                    }
+                                ].map((user, index) => (
+                                    <div key={index} className="bg-white p-6 rounded-xl shadow space-y-4">
+
+                                        {/* Top Section */}
+                                        <div className="flex justify-between">
+                                            <div className="flex gap-3">
+                                                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-violet-600 flex items-center justify-center text-white font-bold">
+                                                    {user.letter}
+                                                </div>
+                                                <div>
+                                                    <h2 className="text-black">{user.name}</h2>
+                                                    <p className="text-sm text-gray-500">{user.email}</p>
+                                                </div>
+                                            </div>
+                                            <MoreVertical className="text-gray-400 cursor-pointer" />
+                                        </div>
+
+                                        {/* Info Section */}
+                                        <div className="space-y-2 text-sm text-black">
+                                            <div className="flex justify-between">
+                                                <span>Industry</span><span>{user.industry}</span>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <span>Plan</span>
+                                                <span className="px-2 py-1 text-purple-600 bg-purple-100 rounded-md">
+                                                    {user.plan}
+                                                </span>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <span>Total Posts</span><span>{user.posts}</span>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <span>Violations</span>
+                                                <span className={user.violations === "0" ? "text-green-600" : "text-red-600"}>
+                                                    {user.violations}
+                                                </span>
+                                            </div>
+
+                                            {/* Status */}
+                                            <div className="flex justify-between">
+                                                <span>Status</span>
+                                                {user.status === "active" && (
+                                                    <span className="flex items-center gap-1 px-2 py-1 bg-green-100 text-green-600 rounded-md">
+                                                        <CheckCircle size={14} /> active
+                                                    </span>
+                                                )}
+                                                {user.status === "suspended" && (
+                                                    <span className="flex items-center gap-1 px-2 py-1 bg-yellow-100 text-yellow-600 rounded-md">
+                                                        <Ban size={14} /> suspended
+                                                    </span>
+                                                )}
+                                                {user.status === "blocked" && (
+                                                    <span className="flex items-center gap-1 px-2 py-1 bg-red-100 text-red-600 rounded-md">
+                                                        <XCircle size={14} /> blocked
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        <hr />
+
+                                        {/* Connected Platforms */}
+                                        <div>
+                                            <p className="text-sm font-medium mb-2 text-black">Connected Platforms</p>
+                                            <div className="flex gap-3 text-xl">
+                                                {user.platforms.includes("facebook") && <FaFacebook className="text-blue-600" />}
+                                                {user.platforms.includes("instagram") && <FaInstagram className="text-pink-500" />}
+                                                {user.platforms.includes("linkedin") && <FaLinkedin className="text-blue-700" />}
+                                                {user.platforms.includes("x") && <FaXTwitter className="text-black" />}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                ))}
+
+                            </div>
+
+                        </div>
+
+                    )}
+
                 </div>
             </main>
         </div>

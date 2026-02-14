@@ -763,24 +763,23 @@ export default function LandingPage() {
 
                     </div>
                 </div>
-            </section>
-            {/* Footer */}
-            <footer className="bg-white dark:bg-[#000000] py-20 border-t border-gray-100 dark:border-gray-800">
-                <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-5 gap-12">
+            </section>{/* Footer */}
+            <footer className="bg-black py-16 md:py-20 border-t border-gray-800">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 md:gap-12">
 
                     {/* Brand + Social */}
-                    <div className="col-span-1 md:col-span-2">
+                    <div className="sm:col-span-2">
                         {/* Logo */}
                         <div className="flex items-center gap-2 mb-6">
-                            <div className="w-10 h-10 bg-black dark:bg-white rounded-lg flex items-center justify-center text-white dark:text-black font-black text-lg">
+                            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-black font-black text-lg">
                                 S
                             </div>
-                            <span className="text-xl font-black tracking-tight text-black dark:text-white">
+                            <span className="text-xl font-black tracking-tight text-white">
                                 Shoutly<span className="text-brand-500">.ai</span>
                             </span>
                         </div>
 
-                        <p className="text-gray-500 dark:text-gray-400 font-medium max-w-sm mb-8">
+                        <p className="text-gray-400 text-sm font-medium max-w-sm mb-8">
                             Empowering creators and brands with AI-driven content tools that save time and amplify impact.
                         </p>
 
@@ -789,7 +788,7 @@ export default function LandingPage() {
                             {[FaTwitter, FaInstagram, FaLinkedinIn, FaFacebookF, FaYoutube].map((Icon, i) => (
                                 <div
                                     key={i}
-                                    className="w-10 h-10 rounded-full border border-white dark:border-gray-700 bg-white dark:bg-gray-800 flex items-center justify-center text-white hover:bg-brand-500 hover:text-white transition-all cursor-pointer"
+                                    className="w-10 h-10 rounded-full border border-gray-700 bg-gray-900 flex items-center justify-center text-gray-300 hover:bg-brand-500 hover:text-white transition-all cursor-pointer"
                                 >
                                     <Icon className="w-5 h-5" />
                                 </div>
@@ -799,44 +798,46 @@ export default function LandingPage() {
 
                     {/* Product Column */}
                     <div>
-                        <h4 className="font-black text-gray-900 dark:text-white mb-6">Products</h4>
-                        <ul className="space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400">
-                            <li><Link href="#" className="hover:text-brand-500">Features</Link></li>
-                            <li><Link href="#" className="hover:text-brand-500">Pricing</Link></li>
-                            <li><Link href="#" className="hover:text-brand-500">Integrations</Link></li>
-                            <li><Link href="#" className="hover:text-brand-500">Changelog</Link></li>
+                        <h4 className="font-semibold text-white mb-5">Products</h4>
+                        <ul className="space-y-3 text-sm text-gray-400">
+                            <li><Link href="#" className="hover:text-white transition">Features</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Pricing</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Integrations</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Changelog</Link></li>
                         </ul>
                     </div>
 
                     {/* Industries Column */}
                     <div>
-                        <h4 className="font-black text-gray-900 dark:text-white mb-6">Industries</h4>
-                        <ul className="space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400">
-                            <li><Link href="#" className="hover:text-brand-500">Health & Fitness</Link></li>
-                            <li><Link href="#" className="hover:text-brand-500">Food & Beverage</Link></li>
-                            <li><Link href="#" className="hover:text-brand-500">Education</Link></li>
-                            <li><Link href="#" className="hover:text-brand-500">Real Estate</Link></li>
+                        <h4 className="font-semibold text-white mb-5">Industries</h4>
+                        <ul className="space-y-3 text-sm text-gray-400">
+                            <li><Link href="#" className="hover:text-white transition">Health & Fitness</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Food & Beverage</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Education</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Real Estate</Link></li>
                         </ul>
                     </div>
 
                     {/* Resources Column */}
                     <div>
-                        <h4 className="font-black text-gray-900 dark:text-white mb-6">Resources</h4>
-                        <ul className="space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400">
-                            <li><Link href="#" className="hover:text-brand-500">Blog</Link></li>
-                            <li><Link href="#" className="hover:text-brand-500">Help Center</Link></li>
-                            <li><Link href="#" className="hover:text-brand-500">Guides</Link></li>
-                            <li><Link href="#" className="hover:text-brand-500">Case Studies</Link></li>
+                        <h4 className="font-semibold text-white mb-5">Resources</h4>
+                        <ul className="space-y-3 text-sm text-gray-400">
+                            <li><Link href="#" className="hover:text-white transition">Blog</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Help Center</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Guides</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Case Studies</Link></li>
                         </ul>
                     </div>
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="max-w-7xl mx-auto px-6 mt-20 pt-10 border-t border-gray-200 dark:border-gray-800 flex flex-col md:flex-row justify-between items-center gap-6">
-                    <p className="text-gray-400 text-xs font-bold">© 2026 Shoutly AI Inc. All rights reserved.</p>
-                    <div className="flex gap-8 text-gray-400 text-xs font-bold">
-                        <Link href="#" className="hover:text-gray-900 dark:hover:text-white">Privacy Policy</Link>
-                        <Link href="#" className="hover:text-gray-900 dark:hover:text-white">Terms of Service</Link>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-12 md:mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+                    <p className="text-gray-500 text-xs">
+                        © 2026 Shoutly AI Inc. All rights reserved.
+                    </p>
+                    <div className="flex gap-6 text-gray-500 text-xs">
+                        <Link href="#" className="hover:text-white transition">Privacy Policy</Link>
+                        <Link href="#" className="hover:text-white transition">Terms of Service</Link>
                     </div>
                 </div>
             </footer>
