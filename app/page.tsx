@@ -194,40 +194,30 @@ export default function LandingPage() {
                         transition={{ duration: 1, delay: 0.6 }}
                     >
                         <p>Upload your logo → Enter one prompt → Get 365 days of AI-built content</p>
-                        <p className="text-lg text-blue-600 font-light">
+                        <p className="text-lg text-blue-600 font-light whitespace-nowrap overflow-hidden text-ellipsis">
                             Images • Reels • Captions • Hashtags • Auto Scheduling
                         </p>
 
                     </motion.div>
                     {/* Action Buttons */}
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+                    <div className="flex flex-row justify-center gap-4 flex-wrap mb-6">
 
                         {/* Try Free Button */}
                         <button
-                            className="flex items-center gap-2 px-7 py-3 rounded-full bg-[#000000] text-white hover:opacity-90 transition"
+                            className="flex items-center gap-2 px-6 py-3 rounded-full bg-[#000000] text-white hover:opacity-90 transition"
                             style={{ fontFamily: "Arial", fontWeight: 400 }}
                         >
-                            <svg
-                                className="w-4 h-4"
-                                fill="currentColor"
-                                viewBox="0 0 24 24"
-                            >
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
                             </svg>
-
                             <span className="text-sm">Try Free</span>
                         </button>
 
-                        {/* Watch Video Button */}
                         <button
-                            className="flex items-center gap-2 px-7 py-3 rounded-full bg-white text-black border border-gray-300 hover:bg-gray-50 transition"
+                            className="flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black border border-gray-300 hover:bg-gray-50 transition"
                             style={{ fontFamily: "Arial", fontWeight: 400 }}
                         >
-                            <svg
-                                className="w-4 h-4"
-                                fill="currentColor"
-                                viewBox="0 0 24 24"
-                            >
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M8 5v14l11-7z" />
                             </svg>
                             <span className="text-sm">Watch Video</span>
@@ -313,31 +303,31 @@ export default function LandingPage() {
                         </motion.a>
                     </div>
                     {/* Rocket Accent */}
-                    <span className="absolute bottom-6 left-6 text-5xl select-none">
+                    <span className="absolute -bottom-4 -left-2 text-3xl sm:text-5xl select-none z-0">
                         🚀
                     </span>
-
                 </div>
             </header>
             {/* See It In Action Section */}
-            <section className="py-20 bg-white">
-                <div className="max-w-7xl mx-auto px-6 text-center">
+            <section className="py-14 sm:py-20 bg-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
 
                     {/* Title */}
-                    <h2 className="text-4xl md:text-5xl text-[#000000] font-arial mb-12">
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl text-black font-arial mb-10 sm:mb-12">
                         See it in Action
                     </h2>
 
                     {/* Flow Steps */}
-                    <div className="flex flex-wrap items-center justify-center gap-4 mb-16">
+                    <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 mb-12 sm:mb-16">
                         {[
                             { label: "Select Industry", color: "bg-blue-500" },
                             { label: "Enter Prompt", color: "bg-violet-500" },
                             { label: "AI Generates", color: "bg-pink-500" },
                             { label: "Auto Schedule", color: "bg-green-500" },
                         ].map((step, index) => (
-                            <div key={step.label} className="flex items-center gap-4">
-                                <div className="flex items-center gap-2 px-6 py-3 rounded-full border border-gray-300 text-sm font-medium text-black bg-gray-200 shadow-sm">
+                            <div key={step.label} className="flex items-center gap-3">
+
+                                <div className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-300 text-xs sm:text-sm font-medium text-black bg-gray-200 shadow-sm">
 
                                     {/* Colored dot */}
                                     <span className={`w-2.5 h-2.5 rounded-full ${step.color}`} />
@@ -345,17 +335,20 @@ export default function LandingPage() {
                                     {step.label}
                                 </div>
 
+                                {/* Arrow (hide on mobile) */}
                                 {index !== 3 && (
-                                    <span className="text-gray-400 text-xl">→</span>
+                                    <span className="hidden sm:inline text-gray-400 text-xl">
+                                        →
+                                    </span>
                                 )}
                             </div>
                         ))}
                     </div>
-                    {/* Video Section */}
-                    <div className="relative max-w-4xl mx-auto mb-20">
-                        <div className="relative aspect-video rounded-3xl overflow-hidden border border-gray-200 shadow-lg bg-black">
 
-                            {/* Video */}
+                    {/* Video Section */}
+                    <div className="relative max-w-4xl mx-auto mb-14 sm:mb-20">
+                        <div className="relative aspect-video rounded-2xl sm:rounded-3xl overflow-hidden border border-gray-200 shadow-lg bg-black">
+
                             <video
                                 ref={videoRef}
                                 className="w-full h-full object-cover"
@@ -363,7 +356,6 @@ export default function LandingPage() {
                                 poster="images/demo.jpg"
                             />
 
-                            {/* Play Button Overlay */}
                             {!isPlaying && (
                                 <button
                                     onClick={() => {
@@ -372,17 +364,16 @@ export default function LandingPage() {
                                     }}
                                     className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-sm"
                                 >
-                                    <div className="w-20 h-20 rounded-full bg-white text-black flex items-center justify-center text-2xl shadow-xl hover:scale-110 transition-transform">
+                                    <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white text-black flex items-center justify-center text-xl sm:text-2xl shadow-xl hover:scale-110 transition-transform">
                                         ▶
                                     </div>
                                 </button>
                             )}
-
                         </div>
                     </div>
 
                     {/* Feature Cards */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
                         {[
                             { emoji: "⚡", title: "2-Minutes Setup" },
                             { emoji: "🎨", title: "Auto-Branded" },
@@ -391,10 +382,12 @@ export default function LandingPage() {
                         ].map((item) => (
                             <div
                                 key={item.title}
-                                className="bg-gray-200 border border-gray-200 rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition-all"
+                                className="bg-gray-200 border border-gray-200 rounded-2xl p-6 sm:p-8 text-center shadow-sm hover:shadow-md transition-all"
                             >
-                                <div className="text-4xl mb-4">{item.emoji}</div>
-                                <h3 className="text-lg font-semibold text-black">
+                                <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">
+                                    {item.emoji}
+                                </div>
+                                <h3 className="text-base sm:text-lg font-semibold text-black">
                                     {item.title}
                                 </h3>
                             </div>
@@ -404,17 +397,13 @@ export default function LandingPage() {
                 </div>
             </section>
             {/* Generate Your Year of Content Section */}
-            <section className="py-24 bg-white text-black">
-                <div className="max-w-7xl mx-auto px-6">
+            <section className="py-14 sm:py-24 bg-white text-black">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
                     {/* Top Badge */}
-                    <div className="flex justify-center mb-6">
-                        <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-semibold">
-                            <svg
-                                className="w-4 h-4"
-                                fill="currentColor"
-                                viewBox="0 0 24 24"
-                            >
+                    <div className="flex justify-center mb-5 sm:mb-6">
+                        <span className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs sm:text-sm font-semibold">
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
                             </svg>
                             <span>3 Simple Steps</span>
@@ -422,33 +411,32 @@ export default function LandingPage() {
                     </div>
 
                     {/* Title */}
-                    <h2 className="text-4xl md:text-5xl text-center mb-4">
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl text-center mb-3 sm:mb-4">
                         Generate Your Year of Content
                     </h2>
 
                     {/* Subtitle */}
-                    <p className="text-center text-gray-600 max-w-2xl mx-auto mb-16">
+                    <p className="text-center text-gray-600 text-sm sm:text-base max-w-2xl mx-auto mb-10 sm:mb-16 px-2">
                         One prompt, 365 days of posts. Including local festivals & events.
                     </p>
 
                     {/* Cards Row */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10">
 
                         {/* CARD 1 */}
-                        <div className="border border-gray-200 rounded-3xl p-8 shadow-sm">
+                        <div className="border border-gray-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-sm">
 
-                            {/* Badge */}
-                            <div className="flex items-center gap-3 mb-6">
-                                <span className="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center font-semibold">
+                            <div className="flex items-center gap-3 mb-5 sm:mb-6">
+                                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-black text-white flex items-center justify-center text-sm font-semibold">
                                     1
                                 </span>
-                                <h3 className="text-xl font-semibold">
+                                <h3 className="text-lg sm:text-xl font-semibold">
                                     Select your industry
                                 </h3>
                             </div>
 
                             {/* Dropdown */}
-                            <select className="w-full mb-8 px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black">
+                            <select className="w-full mb-6 sm:mb-8 px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black text-sm sm:text-base">
                                 <option>Choose your industry</option>
                                 <option>Health</option>
                                 <option>Food</option>
@@ -459,7 +447,7 @@ export default function LandingPage() {
                             </select>
 
                             {/* Industry Cards */}
-                            <div className="grid grid-cols-3 gap-4">
+                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                                 {[
                                     { emoji: "🏥", label: "Health" },
                                     { emoji: "🍔", label: "Food" },
@@ -470,52 +458,54 @@ export default function LandingPage() {
                                 ].map((item) => (
                                     <div
                                         key={item.label}
-                                        className="border border-gray-200 rounded-2xl py-6 flex flex-col items-center justify-center hover:shadow-md transition"
+                                        className="border border-gray-200 rounded-xl sm:rounded-2xl py-4 sm:py-6 flex flex-col items-center justify-center hover:shadow-md transition"
                                     >
-                                        <span className="text-2xl mb-2">{item.emoji}</span>
-                                        <span className="text-sm font-medium">{item.label}</span>
+                                        <span className="text-xl sm:text-2xl mb-1 sm:mb-2">
+                                            {item.emoji}
+                                        </span>
+                                        <span className="text-xs sm:text-sm font-medium text-center">
+                                            {item.label}
+                                        </span>
                                     </div>
                                 ))}
                             </div>
                         </div>
 
                         {/* CARD 2 */}
-                        <div className="border border-gray-200 rounded-3xl p-8 shadow-sm bg-gray-100">
+                        <div className="border border-gray-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-sm bg-gray-100">
 
-                            {/* Badge */}
-                            <div className="flex items-center gap-3 mb-6">
-                                <span className="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center font-semibold">
+                            <div className="flex items-center gap-3 mb-5 sm:mb-6">
+                                <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-black text-white flex items-center justify-center text-sm font-semibold">
                                     2
                                 </span>
-                                <h3 className="text-xl font-semibold">
+                                <h3 className="text-lg sm:text-xl font-semibold">
                                     Describe Your Brand
                                 </h3>
                             </div>
 
                             {/* Textarea */}
-                            <div className="relative">
-                                <textarea
-                                    className="w-full h-50 p-4 bg-white rounded-2xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black resize-none"
-                                    placeholder="I'm an architect- generate 365 instagram posts, reels and festival creatives."
-                                />
+                            <textarea
+                                className="w-full min-h-[140px] sm:min-h-[180px] p-4 bg-white rounded-2xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black resize-none text-sm sm:text-base mb-4"
+                                placeholder="I'm an architect- generate 365 instagram posts, reels and festival creatives."
+                            />
 
-                                {/* Buttons inside textarea */}
-                                <div className="absolute bottom-4 left-4 flex gap-3">
-                                    <button className="px-4 py-2 rounded-lg bg-gray-300 text-black text-sm font-medium">
-                                        Create Now Health Photo!
-                                    </button>
-                                    <button className="px-4 py-2 bg-gray-300 rounded-lg border border-black text-sm font-medium">
-                                        I want to Reals Health Photo!
-                                    </button>
-                                </div>
+                            {/* Action Buttons BELOW textarea (mobile safe) */}
+                            <div className="flex flex-col sm:flex-row gap-3 mb-4">
+                                <button className="px-4 py-2 rounded-lg bg-gray-300 text-black text-xs sm:text-sm font-medium">
+                                    Create Health Photo
+                                </button>
+                                <button className="px-4 py-2 bg-gray-300 rounded-lg border border-black text-xs sm:text-sm font-medium">
+                                    Create Reels Photo
+                                </button>
                             </div>
 
                             {/* Hint */}
-                            <p className="text-sm text-gray-500 mt-4">
+                            <p className="text-xs sm:text-sm text-gray-500">
                                 <b>Hint:</b> Be specific about your services, target audience, and content style
                             </p>
+
                             {/* Final CTA */}
-                            <button className="w-full mt-8 py-4 rounded-2xl bg-gradient-to-r from-gray-300 to-gray-500 text-white text-lg font-semibold hover:opacity-90 transition">
+                            <button className="w-full mt-6 sm:mt-8 py-3 sm:py-4 rounded-2xl bg-gradient-to-r from-gray-300 to-gray-500 text-white text-base sm:text-lg font-semibold hover:opacity-90 transition">
                                 Generate 365 Days of Content
                             </button>
                         </div>
@@ -524,40 +514,40 @@ export default function LandingPage() {
                 </div>
             </section>
             {/* Browse Our Library Section */}
-            <section className="py-24 bg-white">
-                <div className="max-w-7xl mx-auto px-6">
+            <section className="py-14 sm:py-24 bg-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6">
+
                     {/* Top Gradient Badge */}
-                    <div className="flex justify-center mb-6">
-                        <span className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 text-white text-sm font-semibold">
+                    <div className="flex justify-center mb-5 sm:mb-6">
+                        <span className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 text-white text-xs sm:text-sm font-semibold text-center">
                             <SparklesIcon className="w-4 h-4 text-white" />
                             10,000+ Professional Templates
                         </span>
                     </div>
 
-
                     {/* Title */}
-                    <h2 className="text-4xl md:text-5xl text-center text-black mb-4">
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl text-center text-black mb-3 sm:mb-4">
                         Browse Our Library
                     </h2>
 
                     {/* Subtitle */}
-                    <p className="text-center text-gray-600 max-w-2xl mx-auto mb-16">
+                    <p className="text-center text-gray-600 text-sm sm:text-base max-w-2xl mx-auto mb-10 sm:mb-16 px-2">
                         Industry-specific templates that update instantly based on your selection
                     </p>
 
                     {/* Main Card */}
-                    <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-3xl p-8 shadow-xl border border-gray-200">
+                    <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl border border-gray-200">
 
                         {/* Top Controls */}
-                        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
+                        <div className="flex flex-col gap-6 mb-8 sm:mb-10">
 
-                            {/* Tabs */}
-                            <div className="flex gap-3">
+                            {/* Tabs (scrollable on mobile) */}
+                            <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
                                 {["Images", "Reels", "Festivals & Occasions"].map((tab, i) => (
                                     <button
                                         key={tab}
-                                        className={`px-5 py-2 rounded-full text-sm font-medium transition
-                ${i === 0
+                                        className={`whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition
+                                ${i === 0
                                                 ? "bg-black text-white shadow"
                                                 : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-100"
                                             }`}
@@ -567,15 +557,15 @@ export default function LandingPage() {
                                 ))}
                             </div>
 
-                            {/* Search + Dropdown */}
-                            <div className="flex gap-4">
+                            {/* Search + Dropdown (stack on mobile) */}
+                            <div className="flex flex-col sm:flex-row gap-4">
                                 <input
                                     type="text"
                                     placeholder="Search templates"
-                                    className="px-4 py-2 rounded-xl bg-white text-gray-800 placeholder-gray-400 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                    className="w-full px-4 py-2 rounded-xl bg-white text-gray-800 placeholder-gray-400 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
                                 />
 
-                                <select className="px-4 py-2 rounded-xl bg-white text-gray-800 border border-gray-300 focus:outline-none">
+                                <select className="w-full sm:w-auto px-4 py-2 rounded-xl bg-white text-gray-800 border border-gray-300 focus:outline-none text-sm">
                                     <option>Food & Beverages</option>
                                     <option>Health</option>
                                     <option>Fashion</option>
@@ -586,29 +576,28 @@ export default function LandingPage() {
                         </div>
 
                         {/* Templates Grid */}
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6">
                             {Array.from({ length: 15 }).map((_, i) => (
                                 <div
                                     key={i}
-                                    className="relative aspect-square rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-md hover:scale-[1.03] transition-all"
+                                    className="relative aspect-square rounded-xl sm:rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-md hover:scale-[1.03] transition-all"
                                 >
                                     {/* Badge */}
-                                    <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-white text-gray-400 text-xs font-semibold shadow">
+                                    <span className="absolute top-2 right-2 px-2 sm:px-3 py-1 rounded-full bg-white text-gray-400 text-[10px] sm:text-xs font-semibold shadow">
                                         #{i + 1}
                                     </span>
-                                    {/* Image / Placeholder */}
+
                                     {i < 4 ? (
                                         <img
                                             src={`/templates/template-${i + 1}.jpg`}
                                             alt={`Template ${i + 1}`}
-                                            className="w-full h-full object-cover rounded-2xl"
+                                            className="w-full h-full object-cover rounded-xl sm:rounded-2xl"
                                         />
                                     ) : (
-                                        <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
+                                        <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs sm:text-sm text-center px-2">
                                             Template Preview
                                         </div>
                                     )}
-
                                 </div>
                             ))}
                         </div>
@@ -616,6 +605,7 @@ export default function LandingPage() {
                     </div>
                 </div>
             </section>
+
 
             {/* Who We Help Section */}
             <section className="py-24 bg-white">
