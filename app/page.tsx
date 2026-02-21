@@ -216,7 +216,7 @@ export default function LandingPage() {
             </nav>
 
             {/* Hero Section */}
-            <div className="pt-16 md:pt-20">
+            <div className="pt-10 md:pt-10">
                 <HeroSection />
             </div>
             <AIPapersSection />

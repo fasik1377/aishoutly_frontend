@@ -168,30 +168,21 @@ export default function HeroSection() {
 
     return (
         <header className="w-full bg-white overflow-hidden">
-            {/* Animation Section */}
-            <div className="relative w-full h-[55vh] flex items-center justify-center">
-                <canvas
-                    ref={canvasRef}
-                    className="absolute inset-0 w-full h-full"
-                />
+            {/* Content Section (TEXT FIRST) */}
+            <div className="max-w-5xl mx-auto text-center px-6 py-16">
 
-                {/* Badge inside animation */}
                 <motion.span
                     animate={{ y: [0, -6, 0] }}
                     transition={{ duration: 3, repeat: Infinity }}
-                    className="relative z-10 inline-flex items-center -mt-63 gap-2 py-2 px-4 rounded-full
-          bg-white/70 backdrop-blur-md text-blue-600
-          text-[10px] uppercase tracking-widest
-          border border-blue-200 shadow-md"
+                    className="relative z-10 inline-flex items-center gap-2 py-2 px-4 rounded-full
+                bg-white/70 backdrop-blur-md text-blue-600
+                text-[10px] uppercase tracking-widest mb-10
+                border border-blue-200 shadow-md"
                     style={{ fontFamily: "Arial", fontWeight: 600 }}
                 >
                     <SparklesIcon className="w-4 h-4 text-blue-600 animate-pulse" />
                     AI-Powered Content Generation
                 </motion.span>
-            </div>
-
-            {/* Content Section */}
-            <div className="max-w-5xl mx-auto text-center px-6 py-16">
                 <motion.div variants={container} initial="hidden" animate="show">
                     {/* Headline */}
                     <motion.h1
@@ -254,6 +245,16 @@ export default function HeroSection() {
                     </motion.div>
                 </motion.div>
             </div>
+
+            {/* Animation Section (NOW BELOW TEXT) */}
+            <div className="relative w-full h-[55vh] flex items-center justify-center bg-black">
+                <canvas
+                    ref={canvasRef}
+                    className="absolute inset-0 w-full h-full"
+                />
+
+            </div>
         </header>
+
     );
 }
