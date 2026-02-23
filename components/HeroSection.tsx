@@ -186,18 +186,25 @@ export default function HeroSection() {
             animationId = requestAnimationFrame(draw);
         }
 
-        // Wait for images to load
         const allImages = [logo, ...Object.values(icons)];
         let loaded = 0;
+
+        function checkStart() {
+            loaded++;
+            if (loaded === allImages.length) {
+                resize();
+                window.addEventListener("resize", resize);
+                requestAnimationFrame(draw);
+            }
+        }
+
         allImages.forEach((img) => {
-            img.onload = img.onerror = () => {
-                loaded++;
-                if (loaded === allImages.length) {
-                    resize();
-                    window.addEventListener("resize", resize);
-                    requestAnimationFrame(draw);
-                }
-            };
+            if (img.complete) {
+                checkStart(); // already loaded (production case)
+            } else {
+                img.onload = checkStart;
+                img.onerror = checkStart;
+            }
         });
 
         return () => {
