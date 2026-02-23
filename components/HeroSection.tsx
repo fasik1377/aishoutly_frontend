@@ -22,12 +22,21 @@ export default function HeroSection() {
     };
 
     useEffect(() => {
-        const canvas = canvasRef.current!;
-        const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
+        if (typeof window === "undefined") return; // SSR safety
+
+        const canvas = canvasRef.current;
+        if (!canvas) return; // canvas must exist
+
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return; // ctx must exist
+
         const DPR = window.devicePixelRatio || 1;
 
+        // Images
         const logo = new Image();
         logo.src = "images/logo.png";
+
+
         const icons: Record<string, HTMLImageElement> = {
             facebook: new Image(),
             instagram: new Image(),
@@ -42,11 +51,13 @@ export default function HeroSection() {
         icons.x.src = "images/social/x.png";
         icons.tiktok.src = "images/social/tiktok1.png";
 
-        let AI: any, PLATFORMS: any[] = [];
-        let dots: any[] = [];
-        let uid = 0;
-        let lastSpawn = 0;
-        let ORBIT_ICONS: any[] = [];
+        let AI: any,
+            PLATFORMS: any[] = [],
+            ORBIT_ICONS: any[] = [],
+            dots: any[] = [],
+            uid = 0,
+            lastSpawn = 0,
+            animationId: number;
 
         function buildLayout() {
             const vw = window.innerWidth;
@@ -55,7 +66,6 @@ export default function HeroSection() {
 
             AI = { x: vw * 0.15, y: cy, label: "ShoutlyAI", color: "#00d4ff", r: 50 };
 
-            // Existing right-side icons (UNCHANGED)
             PLATFORMS = [
                 { x: vw * 0.85, y: vh * 0.1, type: "facebook", color: "#1877F2", r: 27 },
                 { x: vw * 0.85, y: vh * 0.3, type: "instagram", color: "#E1306C", r: 27 },
@@ -64,9 +74,7 @@ export default function HeroSection() {
                 { x: vw * 0.85, y: vh * 0.89, type: "tiktok", color: "#FF0050", r: 27 },
             ];
 
-            // NEW orbiting icons around the logo
             const orbitRadius = 120;
-
             ORBIT_ICONS = [
                 { type: "facebook", angle: 0, speed: 0.02 },
                 { type: "instagram", angle: 1.2, speed: 0.018 },
@@ -84,6 +92,7 @@ export default function HeroSection() {
         }
 
         function resize() {
+            if (!canvas || !ctx) return; // double-check safety
             const h = window.innerHeight * 0.55;
             canvas.width = window.innerWidth * DPR;
             canvas.height = h * DPR;
@@ -93,130 +102,124 @@ export default function HeroSection() {
             buildLayout();
         }
 
-        function spawnPlatformBurst() {
-            for (let i = 0; i < 20; i++) {
-                const target =
-                    PLATFORMS[Math.floor(Math.random() * PLATFORMS.length)];
-
-                dots.push({
-                    id: uid++,
-                    from: AI,
-                    to: target,
-                    t: 0,
-                    speed: 0.012 + Math.random() * 0.015,
-                    color: target.color,
-                    size: 3 + Math.random() * 3,
-                });
-            }
-        }
-
-        function bezier(t: number, a: any, b: any) {
-            const mx = (a.x + b.x) / 2;
-            const my = (a.y + b.y) / 2 - 80;
-            const m = 1 - t;
-
-            return {
-                x: m * m * a.x + 2 * m * t * mx + t * t * b.x,
-                y: m * m * a.y + 2 * m * t * my + t * t * b.y,
-            };
-        }
-
         function drawNode(n: any) {
+            if (!ctx || !n) return;
             const floatY = n.y + Math.sin(performance.now() * 0.001 + n.x) * 6;
-
             ctx.beginPath();
             ctx.arc(n.x, floatY, n.r, 0, Math.PI * 2);
             ctx.fillStyle = "#ffffff";
             ctx.fill();
-
             ctx.lineWidth = 2;
             ctx.strokeStyle = n.color;
             ctx.stroke();
-
             ctx.shadowBlur = 30;
             ctx.shadowColor = n.color;
             ctx.stroke();
             ctx.shadowBlur = 0;
 
-            // Draw center icon
-            if (n.label === "ShoutlyAI") {
+            if (n.label === "ShoutlyAI" && logo.complete) {
                 ctx.drawImage(logo, n.x - n.r, floatY - n.r, n.r * 2, n.r * 2);
-            } else if (icons[n.type]) {
+            } else if (n.type && icons[n.type] && icons[n.type].complete) {
                 const size = n.r * 1.2;
-                ctx.drawImage(
-                    icons[n.type],
-                    n.x - size / 2,
-                    floatY - size / 2,
-                    size,
-                    size
-                );
+                ctx.drawImage(icons[n.type], n.x - size / 2, floatY - size / 2, size, size);
             }
         }
-
         function draw(ts: number) {
+            const canvas = canvasRef.current;
+            if (!canvas) return;
+            const ctx = canvas.getContext("2d");
+            if (!ctx) return;
+
+            // Clear canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+            // Spawn dots periodically
             if (ts - lastSpawn > 600) {
-                spawnPlatformBurst();
+                for (let i = 0; i < 20; i++) {
+                    const target = PLATFORMS[Math.floor(Math.random() * PLATFORMS.length)];
+                    dots.push({
+                        id: uid++,
+                        from: AI,
+                        to: target,
+                        t: 0,
+                        speed: 0.012 + Math.random() * 0.015,
+                        color: target.color,
+                        size: 3 + Math.random() * 3,
+                    });
+                }
                 lastSpawn = ts;
             }
 
+            // Draw dots
             for (let i = dots.length - 1; i >= 0; i--) {
                 const d = dots[i];
                 d.t += d.speed;
-                const pos = bezier(d.t, d.from, d.to);
-
+                const mx = (d.from.x + d.to.x) / 2;
+                const my = (d.from.y + d.to.y) / 2 - 80;
+                const m = 1 - d.t;
+                const pos = {
+                    x: m * m * d.from.x + 2 * m * d.t * mx + d.t * d.t * d.to.x,
+                    y: m * m * d.from.y + 2 * m * d.t * my + d.t * d.t * d.to.y,
+                };
                 ctx.beginPath();
                 ctx.arc(pos.x, pos.y, d.size, 0, Math.PI * 2);
                 ctx.fillStyle = d.color;
                 ctx.fill();
-
                 if (d.t >= 1) dots.splice(i, 1);
             }
 
+            // Draw center AI node
             drawNode(AI);
 
             // Animate orbit icons
             ORBIT_ICONS.forEach((icon) => {
                 icon.angle += icon.speed;
-
                 icon.x = AI.x + Math.cos(icon.angle) * icon.orbit;
                 icon.y = AI.y + Math.sin(icon.angle) * icon.orbit;
-
                 drawNode(icon);
             });
 
-            // Keep original platform icons
+            // Draw platform nodes
             PLATFORMS.forEach(drawNode);
 
-            requestAnimationFrame(draw);
+            // Next frame
+            animationId = requestAnimationFrame(draw);
         }
 
-        resize();
-        window.addEventListener("resize", resize);
-        requestAnimationFrame(draw);
-        return () => window.removeEventListener("resize", resize);
-    }, []);
+        // Wait for images to load
+        const allImages = [logo, ...Object.values(icons)];
+        let loaded = 0;
+        allImages.forEach((img) => {
+            img.onload = img.onerror = () => {
+                loaded++;
+                if (loaded === allImages.length) {
+                    resize();
+                    window.addEventListener("resize", resize);
+                    requestAnimationFrame(draw);
+                }
+            };
+        });
 
+        return () => {
+            cancelAnimationFrame(animationId);
+            window.removeEventListener("resize", resize);
+        };
+    }, []);
     return (
         <header className="w-full bg-white overflow-hidden">
-            {/* Content Section (TEXT FIRST) */}
+            {/* Content Section */}
             <div className="max-w-5xl mx-auto text-center px-6 py-16">
-
                 <motion.span
                     animate={{ y: [0, -6, 0] }}
                     transition={{ duration: 3, repeat: Infinity }}
-                    className="relative z-10 inline-flex items-center gap-2 py-2 px-4 rounded-full
-                bg-white/70 backdrop-blur-md text-blue-600
-                text-[10px] uppercase tracking-widest mb-10
-                border border-blue-200 shadow-md"
+                    className="relative z-10 inline-flex items-center gap-2 py-2 px-4 rounded-full bg-white/70 backdrop-blur-md text-blue-600 text-[10px] uppercase tracking-widest mb-10 border border-blue-200 shadow-md"
                     style={{ fontFamily: "Arial", fontWeight: 600 }}
                 >
                     <SparklesIcon className="w-4 h-4 text-blue-600 animate-pulse" />
                     AI-Powered Content Generation
                 </motion.span>
+
                 <motion.div variants={container} initial="hidden" animate="show">
-                    {/* Headline */}
                     <motion.h1
                         variants={item}
                         className="text-xl sm:text-xl md:text-xl lg:text-3xl font-normal mb-8 leading-tight"
@@ -224,23 +227,18 @@ export default function HeroSection() {
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-purple-700">
                             Generate{" "}
                         </span>
-
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-pink-500">
                             365 Days{" "}
                         </span>
-
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-black">
                             of Social Content, Brand
                         </span>
-
                         <br />
-
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-black">
                             Designs, Reels & Hashtags — in Minutes.
                         </span>
                     </motion.h1>
 
-                    {/* Description */}
                     <motion.div
                         variants={item}
                         className="text-lg md:text-xl text-black mb-10 max-w-2xl mx-auto leading-relaxed space-y-3"
@@ -248,17 +246,12 @@ export default function HeroSection() {
                         <p>
                             Upload your logo → Enter one prompt → Get 365 days of AI-built content
                         </p>
-
                         <p className="text-blue-600">
                             Images • Reels • Captions • Hashtags • Auto Scheduling
                         </p>
                     </motion.div>
 
-                    {/* Buttons */}
-                    <motion.div
-                        variants={item}
-                        className="flex justify-center gap-4 flex-wrap"
-                    >
+                    <motion.div variants={item} className="flex justify-center gap-4 flex-wrap">
                         <motion.button
                             whileHover={{ scale: 1.08 }}
                             whileTap={{ scale: 0.96 }}
@@ -266,7 +259,6 @@ export default function HeroSection() {
                         >
                             Try Free
                         </motion.button>
-
                         <motion.button
                             whileHover={{ scale: 1.08 }}
                             whileTap={{ scale: 0.96 }}
@@ -278,15 +270,10 @@ export default function HeroSection() {
                 </motion.div>
             </div>
 
-            {/* Animation Section (NOW BELOW TEXT) */}
+            {/* Canvas Animation */}
             <div className="relative w-full h-[55vh] flex items-center justify-center bg-white">
-                <canvas
-                    ref={canvasRef}
-                    className="absolute inset-0 w-full h-full"
-                />
-
+                <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
             </div>
         </header>
-
     );
 }
