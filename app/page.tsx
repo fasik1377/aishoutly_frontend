@@ -219,7 +219,7 @@ export default function LandingPage() {
             <div className="pt-10 md:pt-10">
                 <HeroSection />
             </div>
-            <AIPapersSection />
+            {/*<AIPapersSection />*/}
             {/* See It In Action Section */}
             <section className="py-14 sm:py-20 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">

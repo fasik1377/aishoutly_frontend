@@ -4,6 +4,74 @@ import { motion, Variants } from "framer-motion";
 import { useEffect, useRef } from "react";
 
 export default function HeroSection() {
+    function SocialBubblesHero() {
+        const socials = [
+            "images/social/facebook1.jpg",
+            "images/social/instagram1.jpg",
+            "images/social/linkedin1.jpg",
+            "images/social/x.png",
+            "images/social/tiktok1.png",
+            "images/social/youtube.png",
+            "images/social/telegram.png",
+            "images/social/pinterest.png",
+            "images/social/snapchat.jpg",
+            "images/social/whatsapp.png",
+        ];
+
+        const bubbles = new Array(20).fill(0);
+
+        return (
+            <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center">
+                {bubbles.map((_, i) => {
+                    const icon = socials[i % socials.length];
+
+                    return (
+                        <motion.div
+                            key={i}
+                            className="absolute"
+                            style={{
+                                left: `${40 + Math.random() * 20}%`, // centered around text
+                                top: `${30 + Math.random() * 30}%`,
+                            }}
+                            initial={{
+                                x: 0,
+                                y: 0,
+                                opacity: 0,
+                                scale: 0.7,
+                            }}
+                            animate={{
+                                x: [
+                                    0,
+                                    -60 + Math.random() * 120,
+                                    0,
+                                ],
+                                y: [
+                                    0,
+                                    -80 + Math.random() * 160,
+                                    0,
+                                ],
+                                opacity: [0.25, 0.9, 0.25],
+                                scale: [0.8, 1, 0.8],
+                            }}
+                            transition={{
+                                duration: 12 + Math.random() * 6,
+                                repeat: Infinity,
+                                delay: i * 0.4,
+                                ease: "easeInOut",
+                            }}
+                        >
+                            <div className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-white shadow-lg border flex items-center justify-center">
+                                <img
+                                    src={icon}
+                                    className="w-5 h-5 md:w-7 md:h-7 object-contain"
+                                />
+                            </div>
+                        </motion.div>
+                    );
+                })}
+            </div>
+        );
+    }
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     const container: Variants = {
@@ -212,10 +280,112 @@ export default function HeroSection() {
             window.removeEventListener("resize", resize);
         };
     }, []);
+    function FloatingSocials() {
+        const socials = [
+            "images/social/facebook1.jpg",
+            "images/social/instagram1.jpg",
+            "images/social/linkedin1.jpg",
+            "images/social/x.png",
+            "images/social/tiktok1.png",
+        ];
+
+        const bubbles = new Array(18).fill(0);
+
+        return (
+            <>
+                {bubbles.map((_, i) => {
+                    const icon = socials[i % socials.length];
+
+                    return (
+                        <motion.div
+                            key={i}
+                            initial={{
+                                x: 0,
+                                y: 0,
+                                opacity: 0,
+                                scale: 0.8,
+                            }}
+                            animate={{
+                                x: [0, -70 - Math.random() * 360], // move LEFT
+                                y: [
+                                    0,
+                                    -50 + Math.random() * 360, // up and down
+                                ],
+                                opacity: [0.3, 1, 0.3],
+                            }}
+                            transition={{
+                                duration: 10 + Math.random() * 6, // slower
+                                repeat: Infinity,
+                                ease: "easeInOut",
+                                delay: i * 0.4,
+                            }}
+                            className="absolute left-32 top-1/2"
+                        >
+                            <div className="w-12 h-12 rounded-full bg-white shadow-lg border flex items-center justify-center">
+                                <img src={icon} className="w-8 h-8 object-contain" />
+                            </div>
+                        </motion.div>
+                    );
+                })}
+            </>
+        );
+    }
+    function PlatformBubble({ src, top }: any) {
+        return (
+            <motion.div
+                animate={{ x: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                style={{ top }}
+                className="absolute right-16 w-12 h-12 rounded-full bg-white shadow-lg border flex items-center justify-center"
+            >
+                <img src={src} className="w-8 h-8 object-contain" />
+            </motion.div>
+        );
+    }
+    function Particles() {
+        const particles = new Array(60).fill(0);
+
+        return (
+            <>
+                {particles.map((_, i) => {
+                    const yTarget = -200 + Math.random() * 400;
+
+                    return (
+                        <motion.div
+                            key={i}
+                            className="absolute w-2.5 h-2.5 rounded-full"
+                            style={{
+                                background: "#4f46e5",
+                                left: "120px",
+                                top: "50%",
+                            }}
+                            initial={{
+                                x: 0,
+                                y: 0,
+                                opacity: 0,
+                            }}
+                            animate={{
+                                x: 700,
+                                y: yTarget,
+                                opacity: [0, 1, 0],
+                            }}
+                            transition={{
+                                duration: 3,
+                                repeat: Infinity,
+                                delay: i * 0.06,
+                                ease: "easeOut",
+                            }}
+                        />
+                    );
+                })}
+            </>
+        );
+    }
     return (
         <header className="w-full bg-white overflow-hidden">
             {/* Content Section */}
-            <div className="max-w-5xl mx-auto text-center px-6 py-16">
+            <div className="relative max-w-5xl mx-auto text-center px-6 py-16 overflow-hidden">
+                <SocialBubblesHero />
                 <motion.span
                     animate={{ y: [0, -6, 0] }}
                     transition={{ duration: 3, repeat: Infinity }}
@@ -278,8 +448,33 @@ export default function HeroSection() {
             </div>
 
             {/* Canvas Animation */}
-            <div className="relative w-full h-[55vh] flex items-center justify-center bg-white">
-                <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+            {/* New Social Orbit Animation */}
+            <div className="relative w-full h-[55vh] overflow-hidden">
+
+                {/* Center AI Logo */}
+
+                {/* AI Logo (Left Side) */}
+                <div className="absolute left-20 top-1/2 -translate-y-1/2 z-20">
+                    <motion.div
+                        animate={{ y: [0, -12, 0] }}
+                        transition={{ duration: 4, repeat: Infinity }}
+                        className="w-24 h-24 rounded-full bg-white shadow-xl border flex items-center justify-center"
+                    >
+                        <img src="images/logo.png" className="w-20 h-20 object-contain" />
+                    </motion.div>
+                </div>
+                {/* Orbit Icons */}
+                <FloatingSocials />
+
+                {/* Platform Targets */}
+                <PlatformBubble src="images/social/facebook1.jpg" top="10%" />
+                <PlatformBubble src="images/social/instagram1.jpg" top="30%" />
+                <PlatformBubble src="images/social/linkedin1.jpg" top="50%" />
+                <PlatformBubble src="images/social/x.png" top="70%" />
+                <PlatformBubble src="images/social/tiktok1.png" top="88%" />
+
+                {/* Moving Particles */}
+                <Particles />
             </div>
         </header>
     );
