@@ -46,14 +46,16 @@ export default function HeroSection() {
         let dots: any[] = [];
         let uid = 0;
         let lastSpawn = 0;
+        let ORBIT_ICONS: any[] = [];
 
         function buildLayout() {
             const vw = window.innerWidth;
-            const vh = window.innerHeight * 0.55; // animation height
+            const vh = window.innerHeight * 0.55;
             const cy = vh / 2;
 
             AI = { x: vw * 0.15, y: cy, label: "ShoutlyAI", color: "#00d4ff", r: 50 };
 
+            // Existing right-side icons (UNCHANGED)
             PLATFORMS = [
                 { x: vw * 0.85, y: vh * 0.1, type: "facebook", color: "#1877F2", r: 27 },
                 { x: vw * 0.85, y: vh * 0.3, type: "instagram", color: "#E1306C", r: 27 },
@@ -61,6 +63,24 @@ export default function HeroSection() {
                 { x: vw * 0.85, y: vh * 0.7, type: "x", color: "#111111", r: 27 },
                 { x: vw * 0.85, y: vh * 0.89, type: "tiktok", color: "#FF0050", r: 27 },
             ];
+
+            // NEW orbiting icons around the logo
+            const orbitRadius = 120;
+
+            ORBIT_ICONS = [
+                { type: "facebook", angle: 0, speed: 0.02 },
+                { type: "instagram", angle: 1.2, speed: 0.018 },
+                { type: "linkedin", angle: 2.4, speed: 0.016 },
+                { type: "x", angle: 3.6, speed: 0.019 },
+                { type: "tiktok", angle: 4.8, speed: 0.017 },
+            ].map((icon) => ({
+                ...icon,
+                orbit: orbitRadius,
+                r: 18,
+                color: "#ffffff",
+                x: AI.x,
+                y: AI.y,
+            }));
         }
 
         function resize() {
@@ -155,6 +175,18 @@ export default function HeroSection() {
             }
 
             drawNode(AI);
+
+            // Animate orbit icons
+            ORBIT_ICONS.forEach((icon) => {
+                icon.angle += icon.speed;
+
+                icon.x = AI.x + Math.cos(icon.angle) * icon.orbit;
+                icon.y = AI.y + Math.sin(icon.angle) * icon.orbit;
+
+                drawNode(icon);
+            });
+
+            // Keep original platform icons
             PLATFORMS.forEach(drawNode);
 
             requestAnimationFrame(draw);
@@ -247,7 +279,7 @@ export default function HeroSection() {
             </div>
 
             {/* Animation Section (NOW BELOW TEXT) */}
-            <div className="relative w-full h-[55vh] flex items-center justify-center bg-black">
+            <div className="relative w-full h-[55vh] flex items-center justify-center bg-white">
                 <canvas
                     ref={canvasRef}
                     className="absolute inset-0 w-full h-full"
