@@ -185,7 +185,7 @@ export default function LandingPage() {
                 {/* Background Image with subtle floating animation */}
                 <motion.div
                     className="absolute inset-0 bg-cover bg-center opacity-[0.6]"
-                    style={{ backgroundImage: "url('images/sky.jpg')" }}
+                    style={{ backgroundImage: "url('/images/sky.jpg')" }}
                     animate={{ y: [0, -20, 0] }}
                     transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 />
@@ -729,7 +729,7 @@ export default function LandingPage() {
 
                                     {i < 4 ? (
                                         <img
-                                            src={`/templates/template-${i + 1}.jpg`}
+                                            src={`templates/template-${i + 1}.jpg`}
                                             alt={`Template ${i + 1}`}
                                             className="w-full h-full object-cover rounded-xl sm:rounded-2xl"
 
@@ -945,7 +945,7 @@ export default function LandingPage() {
                             {[FaTwitter, FaInstagram, FaLinkedinIn, FaFacebookF, FaYoutube].map((Icon, i) => (
                                 <div
                                     key={i}
-                                    className="w-10 h-10 rounded-full border border-gray-700 bg-gray-900 flex items-center justify-center text-gray-300 hover:bg-brand-500 hover:text-white transition-all cursor-pointer"
+                                    className="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-gray-300 hover:bg-brand-500 hover:text-white transition-all cursor-pointer"
                                 >
                                     <Icon className="w-5 h-5" />
                                 </div>
