@@ -185,7 +185,7 @@ export default function LandingPage() {
                 {/* Background Image with subtle floating animation */}
                 <motion.div
                     className="absolute inset-0 bg-cover bg-center opacity-[0.6]"
-                    style={{ backgroundImage: "url('/images/sky.jpg')" }}
+                    style={{ backgroundImage: "url('images/sky.jpg')" }}
                     animate={{ y: [0, -20, 0] }}
                     transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 />
