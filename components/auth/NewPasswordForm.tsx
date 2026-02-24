@@ -83,7 +83,7 @@ export default function NewPasswordPage() {
                                 placeholder="8 symbols at least"
                                 value={formData.password}
                                 onChange={handleChange}
-                                className="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400"
+                                className="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400 text-black"
                                 style={{ fontFamily: "Arial", fontWeight: 400 }}
                             />
                             <button
@@ -112,7 +112,7 @@ export default function NewPasswordPage() {
                                 placeholder="8 symbols at least"
                                 value={formData.confirmPassword}
                                 onChange={handleChange}
-                                className="w-full pr-10 pl-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400"
+                                className="w-full pr-10 pl-4 py-3 border text-black border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400"
                                 style={{ fontFamily: "Arial", fontWeight: 400 }}
                             />
                             <button
@@ -133,7 +133,7 @@ export default function NewPasswordPage() {
                             !formData.password ||
                             formData.password !== formData.confirmPassword
                         }
-                        className="w-full h-12 bg-[#000000] text-white hover:opacity-90 transition disabled:opacity-60"
+                        className="w-full h-12 bg-[#000000] text-white hover:opacity-90 transition"
                         style={{ fontFamily: "Arial", fontWeight: 400 }}
                     >
                         {loading ? "Updating..." : "Update Password"}

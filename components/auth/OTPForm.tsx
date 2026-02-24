@@ -97,7 +97,7 @@ export default function OTPPage() {
                                 value={digit}
                                 onChange={(e) => handleChange(index, e.target.value)}
                                 onKeyDown={(e) => handleKeyDown(index, e)}
-                                className="w-full h-14 text-center text-lg border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
+                                className="w-full h-14 text-center text-lg border border-gray-300 text-black rounded-xl focus:outline-none focus:ring-2 focus:ring-black"
                                 style={{ fontFamily: "Arial", fontWeight: 400 }}
                             />
                         ))}
@@ -115,7 +115,7 @@ export default function OTPPage() {
                     <button
                         type="submit"
                         disabled={loading || otp.some((d) => !d)}
-                        className="w-full h-12 bg-[#000000] text-white rounded-xl hover:opacity-90 transition disabled:opacity-60"
+                        className="w-full h-12 bg-[#000000] text-white rounded-xl hover:opacity-90 transition"
                         style={{ fontFamily: "Arial", fontWeight: 400 }}
                     >
                         {loading ? "Verifying..." : "Continue"}

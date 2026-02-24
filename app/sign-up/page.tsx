@@ -63,7 +63,7 @@ export default function CreateAccountPage() {
                     <input
                         type="text"
                         placeholder="John Doe"
-                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400"
+                        className="w-full pl-10 pr-4 py-3 border border-gray-300 text-black rounded-xl focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400"
                         style={{ fontFamily: "Arial", fontWeight: 400 }}
                     />
                 </div>
@@ -80,7 +80,7 @@ export default function CreateAccountPage() {
                     <input
                         type="email"
                         placeholder="you@company.com"
-                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400"
+                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl text-black focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400"
                         style={{ fontFamily: "Arial", fontWeight: 400 }}
                     />
                 </div>

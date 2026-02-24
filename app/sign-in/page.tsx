@@ -68,11 +68,11 @@ export default function SignInAccountPage() {
                 </label>
 
                 <div className="relative mb-5">
-                    <EnvelopeIcon className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <EnvelopeIcon className="w-5 h-5 text-black absolute left-3 top-1/2 -translate-y-1/2" />
                     <input
                         type="email"
                         placeholder="you@company.com"
-                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400"
+                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl text-black focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400"
                         style={{ fontFamily: "Arial", fontWeight: 400 }}
                     />
                 </div>
@@ -90,7 +90,7 @@ export default function SignInAccountPage() {
                     <input
                         type="password"
                         placeholder="Enter your password"
-                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400"
+                        className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black placeholder:text-gray-400 text-black"
                         style={{ fontFamily: "Arial", fontWeight: 400 }}
                     />
                 </div>
@@ -120,7 +120,7 @@ export default function SignInAccountPage() {
 
                 <p className="text-center text-sm text-gray-600 font-arial">
                     Don't have an account?{" "}
-                    <Link href="/sign-in" className="font-semibold text-[#000000] hover:underline font-arial">
+                    <Link href="/sign-up" className="font-semibold text-[#000000] hover:underline font-arial">
                         Sign up
                     </Link>
                 </p>
