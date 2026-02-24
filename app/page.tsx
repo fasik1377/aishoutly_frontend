@@ -61,61 +61,25 @@ export default function LandingPage() {
                     const startY = Math.random() * 100;
 
                     return (
-                        <motion.div
-                            key={i}
-                            initial={{
-                                x: `${startX}vw`,
-                                y: `${startY}vh`,
-                                opacity: 0,
-                                scale: 0.6,
-                            }}
-                            animate={{
-                                y: ["0vh", "-120vh"],
-                                x: ["0vw", `${Math.random() * 20 - 10}vw`, "0vw"],
-                                opacity: [0, 0.8, 0],
-                                scale: [0.8, 1.2, 0.8],
-                            }}
-                            transition={{
-                                duration: 20 + i * 2,
-                                repeat: Infinity,
-                                delay: i * 1.2,
-                                ease: "linear",
-                            }}
+                        <div
                             className="absolute"
                         >
                             <div className="text-gray-400/30 text-2xl md:text-3xl bg-white/40 backdrop-blur-md p-4 rounded-full shadow-lg">
                                 <Icon />
                             </div>
-                        </motion.div>
+                        </div>
                     );
                 })}
 
                 {/* AI SPARK BUBBLES */}
                 {[...Array(10)].map((_, i) => (
-                    <motion.div
-                        key={`ai-${i}`}
-                        initial={{
-                            x: `${Math.random() * 100}vw`,
-                            y: "110vh",
-                            opacity: 0,
-                        }}
-                        animate={{
-                            y: "-10vh",
-                            opacity: [0, 0.6, 0],
-                            scale: [0.6, 1.4, 0.6],
-                        }}
-                        transition={{
-                            duration: 18 + i * 2,
-                            repeat: Infinity,
-                            delay: i * 1.5,
-                            ease: "linear",
-                        }}
+                    <div
                         className="absolute"
                     >
                         <div className="p-3 rounded-full bg-gradient-to-r from-blue-400/30 to-purple-500/30 backdrop-blur-md">
                             <SparklesIcon className="w-6 h-6 text-purple-500/40" />
                         </div>
-                    </motion.div>
+                    </div>
                 ))}
             </div>
             {/* Navigation */}
@@ -215,37 +179,227 @@ export default function LandingPage() {
                 )}
             </nav>
 
+
             {/* Hero Section */}
-            <div className="pt-10 md:pt-10">
-                <HeroSection />
-            </div>
+            <header className="pt-32 pb-40 px-6 relative overflow-hidden bg-white">
+                {/* Background Image with subtle floating animation */}
+                <motion.div
+                    className="absolute inset-0 bg-cover bg-center opacity-[0.6]"
+                    style={{ backgroundImage: "url('images/sky.jpg')" }}
+                    animate={{ y: [0, -20, 0] }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                />
+
+
+                {/* Gradient Glow */}
+                <motion.div
+                    className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-500/10 blur-[120px] rounded-full translate-x-1/3 -translate-y-1/3 pointer-events-none"
+                    animate={{ rotate: [0, 15, -15, 0] }}
+                    transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                />
+
+
+                {/* Content */}
+                <div className="max-w-7xl mx-auto text-center relative z-10">
+                    <motion.span
+                        className="inline-flex items-center gap-2 py-2 px-4 rounded-full
+               bg-white/60 backdrop-blur-sm text-blue-600
+               text-[10px] uppercase tracking-widest mb-8
+               border border-blue-200"
+                        style={{ fontFamily: "Arial", fontWeight: 600 }}
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1 }}
+                    >
+                        <SparklesIcon className="w-4 h-4 text-blue-600" />
+                        AI-Powered Content Generation
+                    </motion.span>
+
+
+                    <motion.h1
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+                        className="text-5xl md:text-7xl lg:text-6xl font-normal mb-8 tracking-tight leading-[1.05]"
+
+
+                    >
+                        <h1 className="text-3xl sm:text-4xl md:text-6xl font-normal mb-6 leading-tight">
+
+
+                            {/* Generate */}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-purple-700">
+                                Generate{" "}
+                            </span>
+
+
+                            {/* 365 Days */}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 to-pink-500">
+                                365 Days{" "}
+                            </span>
+
+
+                            {/* of Social Content, Brand */}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 to-black">
+                                of Social Content, Brand
+                            </span>
+
+
+                            <br />
+
+
+                            {/* Designs, Reels & Hashtags - in Minutes. */}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-black">
+                                Designs, Reels & Hashtags — in Minutes.
+                            </span>
+                        </h1>
+
+
+                    </motion.h1>
+                    <motion.div
+                        className="text-xl md:text-xl text-[#000000] dark:text-black mb-12 max-w-2xl mx-auto font-normal leading-relaxed space-y-3"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 0.6 }}
+                    >
+                        <p>Upload your logo → Enter one prompt → Get 365 days of AI-built content</p>
+                        <p className="text-lg text-blue-600 font-light whitespace-nowrap overflow-hidden text-ellipsis">
+                            Images • Reels • Captions • Hashtags • Auto Scheduling
+                        </p>
+
+
+                    </motion.div>
+                    {/* Action Buttons */}
+                    <div className="flex flex-row justify-center gap-4 flex-wrap mb-6">
+
+
+                        {/* Try Free Button */}
+                        <button
+                            className="flex items-center gap-2 px-6 py-3 rounded-full bg-[#000000] text-white hover:opacity-90 transition"
+                            style={{ fontFamily: "Arial", fontWeight: 400 }}
+                        >
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
+                            </svg>
+                            <span className="text-sm">Try Free</span>
+                        </button>
+
+
+                        <button
+                            className="flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black border border-gray-300 hover:bg-gray-50 transition"
+                            style={{ fontFamily: "Arial", fontWeight: 400 }}
+                        >
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                            <span className="text-sm">Watch Video</span>
+                        </button>
+
+
+                    </div>
+
+
+                    {/* Social Icons */}
+                    <div className="flex items-center justify-center gap-6 mt-6">
+                        {/** Facebook */}
+                        <motion.a
+                            href="#"
+                            aria-label="Facebook"
+                            className="w-12 h-12 rounded-full bg-[#1877F2] flex items-center justify-center text-white transition-all"
+                            whileHover={{ scale: 1.2 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 1.1 }}
+                        >
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8v-3h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.3 0-1.7.8-1.7 1.6V12H16l-.4 3h-2.5v7A10 10 0 0 0 22 12z" />
+                            </svg>
+                        </motion.a>
+
+
+                        {/** Twitter */}
+                        <motion.a
+                            href="#"
+                            aria-label="Twitter"
+                            className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-white transition-all"
+                            whileHover={{ scale: 1.2 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 1.2 }}
+                        >
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M18.2 2H21l-6.6 7.5L22 22h-6.6l-4.7-6.1L5.3 22H2l7.1-8.1L2 2h6.8l4.2 5.6L18.2 2z" />
+                            </svg>
+                        </motion.a>
+
+
+                        {/** LinkedIn */}
+                        <motion.a
+                            href="#"
+                            aria-label="LinkedIn"
+                            className="w-12 h-12 rounded-full bg-[#0A66C2] flex items-center justify-center text-white transition-all"
+                            whileHover={{ scale: 1.2 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 1.3 }}
+                        >
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.4 20.4h-3.5v-5.4c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.5H9.5V9h3.4v1.6h.1c.5-.9 1.7-1.8 3.5-1.8 3.7 0 4.4 2.4 4.4 5.6v6zM5.3 7.4a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM7 20.4H3.6V9H7v11.4z" />
+                            </svg>
+                        </motion.a>
+
+
+                        {/** YouTube */}
+                        <motion.a
+                            href="#"
+                            aria-label="YouTube"
+                            className="w-12 h-12 rounded-full bg-[#FF0000] flex items-center justify-center text-white transition-all"
+                            whileHover={{ scale: 1.2 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 1.4 }}
+                        >
+                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.5 6.2s-.2-1.6-.9-2.3c-.8-.9-1.7-.9-2.1-1C16.6 2.5 12 2.5 12 2.5h0s-4.6 0-8.5.4c-.4.1-1.3.1-2.1 1C.7 4.6.5 6.2.5 6.2S0 8.1 0 10v2c0 1.9.5 3.8.5 3.8s.2 1.6.9 2.3c.8.9 1.9.8 2.4.9 1.7.2 7.2.4 7.2.4s4.6 0 8.5-.4c.4-.1 1.3-.1 2.1-1 .7-.7.9-2.3.9-2.3s.5-1.9.5-3.8v-2c0-1.9-.5-3.8-.5-3.8zM9.5 14.5v-5l5 2.5-5 2.5z" />
+                            </svg>
+                        </motion.a>
+
+
+                        {/** Instagram */}
+                        <motion.a
+                            href="#"
+                            aria-label="Instagram"
+                            className="w-12 h-12 rounded-full bg-gradient-to-tr from-yellow-400 via-pink-500 to-purple-600 flex items-center justify-center text-white transition-all"
+                            whileHover={{ scale: 1.2 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 1.5 }}
+                        >
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3h10zm-5 3.5A4.5 4.5 0 1 0 16.5 12 4.5 4.5 0 0 0 12 7.5zm0 7.3A2.8 2.8 0 1 1 14.8 12 2.8 2.8 0 0 1 12 14.8zm4.8-7.9a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1z" />
+                            </svg>
+                        </motion.a>
+                    </div>
+                    {/* Rocket Accent */}
+                    <span className="absolute -bottom-4 -left-2 text-3xl sm:text-5xl select-none z-0">
+                        🚀
+                    </span>
+                </div>
+            </header>
             {/*<AIPapersSection />*/}
             {/* See It In Action Section */}
             <section className="py-14 sm:py-20 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
 
                     {/* Title */}
-                    <motion.h2
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7 }}
-                        viewport={{ once: true }}
+                    <div
                         className="text-2xl sm:text-3xl md:text-5xl text-black font-arial mb-10 sm:mb-12"
                     >
                         See it in Action
-                    </motion.h2>
+                    </div>
 
                     {/* Flow Steps */}
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={{
-                            hidden: {},
-                            visible: {
-                                transition: { staggerChildren: 0.15 },
-                            },
-                        }}
+                    <div
                         className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-4 mb-12 sm:mb-16"
                     >
                         {[
@@ -254,21 +408,13 @@ export default function LandingPage() {
                             { label: "AI Generates", color: "bg-pink-500" },
                             { label: "Auto Schedule", color: "bg-green-500" },
                         ].map((step, index) => (
-                            <motion.div
-                                key={step.label}
-                                variants={{
-                                    hidden: { opacity: 0, y: 30 },
-                                    visible: { opacity: 1, y: 0 },
-                                }}
-                                whileHover={{ scale: 1.05 }}
+                            <div
                                 className="flex items-center gap-3"
                             >
                                 <div className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-300 text-xs sm:text-sm font-medium text-black bg-gray-100 shadow-sm backdrop-blur-md">
 
                                     {/* Animated Dot */}
-                                    <motion.span
-                                        animate={{ scale: [1, 1.4, 1] }}
-                                        transition={{ repeat: Infinity, duration: 2 }}
+                                    <div
                                         className={`w-2.5 h-2.5 rounded-full ${step.color}`}
                                     />
 
@@ -277,24 +423,18 @@ export default function LandingPage() {
 
                                 {/* Animated Arrow */}
                                 {index !== 3 && (
-                                    <motion.span
+                                    <div
                                         className="hidden sm:inline text-gray-400 text-xl"
-                                        animate={{ x: [0, 6, 0] }}
-                                        transition={{ repeat: Infinity, duration: 1.5 }}
                                     >
                                         →
-                                    </motion.span>
+                                    </div>
                                 )}
-                            </motion.div>
+                            </div>
                         ))}
-                    </motion.div>
+                    </div>
 
                     {/* Video Section */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.6 }}
-                        viewport={{ once: true }}
+                    <div
                         className="relative max-w-4xl mx-auto mb-14 sm:mb-20"
                     >
                         <div className="relative aspect-video rounded-2xl sm:rounded-3xl overflow-hidden border border-gray-200 shadow-xl bg-black group">
@@ -314,31 +454,18 @@ export default function LandingPage() {
                                     }}
                                     className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm"
                                 >
-                                    <motion.div
-                                        whileHover={{ scale: 1.15 }}
-                                        whileTap={{ scale: 0.9 }}
-                                        animate={{ boxShadow: ["0 0 0px", "0 0 30px"] }}
-                                        transition={{ repeat: Infinity, duration: 2 }}
+                                    <div
                                         className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white text-black flex items-center justify-center text-xl sm:text-2xl shadow-xl"
                                     >
                                         ▶
-                                    </motion.div>
+                                    </div>
                                 </button>
                             )}
                         </div>
-                    </motion.div>
+                    </div>
 
                     {/* Feature Cards */}
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={{
-                            hidden: {},
-                            visible: {
-                                transition: { staggerChildren: 0.12 },
-                            },
-                        }}
+                    <div
                         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6"
                     >
                         {[
@@ -347,33 +474,21 @@ export default function LandingPage() {
                             { emoji: "📅", title: "365 Days Filled" },
                             { emoji: "🌍", title: "Multi-Platform" },
                         ].map((item) => (
-                            <motion.div
-                                key={item.title}
-                                variants={{
-                                    hidden: { opacity: 0, y: 40 },
-                                    visible: { opacity: 1, y: 0 },
-                                }}
-                                whileHover={{
-                                    y: -8,
-                                    scale: 1.03,
-                                }}
-                                transition={{ type: "spring", stiffness: 200 }}
+                            <div
                                 className="bg-gray-100 border border-gray-200 rounded-2xl p-6 sm:p-8 text-center shadow-sm hover:shadow-xl transition-all"
                             >
-                                <motion.div
-                                    animate={{ y: [0, -6, 0] }}
-                                    transition={{ repeat: Infinity, duration: 3 }}
+                                <div
                                     className="text-3xl sm:text-4xl mb-3 sm:mb-4"
                                 >
                                     {item.emoji}
-                                </motion.div>
+                                </div>
 
                                 <h3 className="text-base sm:text-lg font-semibold text-black">
                                     {item.title}
                                 </h3>
-                            </motion.div>
+                            </div>
                         ))}
-                    </motion.div>
+                    </div>
 
                 </div>
             </section>
@@ -381,70 +496,42 @@ export default function LandingPage() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
                     {/* Floating Badge */}
-                    <motion.div
+                    <div
                         className="flex justify-center mb-5 sm:mb-6"
-                        initial={{ opacity: 0, y: -30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
+
                     >
-                        <motion.span
-                            animate={{ y: [0, -6, 0] }}
-                            transition={{ repeat: Infinity, duration: 3 }}
+                        <div
                             className="inline-flex items-center gap-2 px-4 py-2 sm:px-5 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs sm:text-sm font-semibold shadow-lg"
                         >
-                            <motion.svg
-                                className="w-4 h-4"
-                                fill="currentColor"
-                                viewBox="0 0 24 24"
-                                animate={{ rotate: [0, 20, -20, 0] }}
-                                transition={{ repeat: Infinity, duration: 4 }}
-                            >
-                                <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
-                            </motion.svg>
                             <span>3 Simple Steps</span>
-                        </motion.span>
-                    </motion.div>
+                        </div>
+                    </div>
 
                     {/* Title Reveal Animation */}
-                    <motion.h2
+                    <div
                         className="text-2xl sm:text-3xl md:text-5xl text-center mb-3 sm:mb-4"
-                        initial={{ opacity: 0, letterSpacing: "0.3em" }}
-                        whileInView={{ opacity: 1, letterSpacing: "0em" }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
+
                     >
                         Generate Your Year of Content
-                    </motion.h2>
+                    </div>
 
                     {/* Subtitle */}
-                    <motion.p
+                    <div
                         className="text-center text-gray-600 text-sm sm:text-base max-w-2xl mx-auto mb-10 sm:mb-16 px-2"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        viewport={{ once: true }}
                     >
                         One prompt, 365 days of posts. Including local festivals & events.
-                    </motion.p>
+                    </div>
 
                     {/* Cards Row */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10">
 
                         {/* CARD 1 */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -60, rotate: -2 }}
-                            whileInView={{ opacity: 1, x: 0, rotate: 0 }}
-                            whileHover={{ rotate: 1, scale: 1.02 }}
-                            transition={{ duration: 0.6 }}
-                            viewport={{ once: true }}
+                        <div
                             className="border border-gray-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-sm relative overflow-hidden"
                         >
                             {/* AI scanning light */}
-                            <motion.div
+                            <div
                                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                                animate={{ x: ["-100%", "100%"] }}
-                                transition={{ repeat: Infinity, duration: 5 }}
                             />
 
                             <div className="flex items-center gap-3 mb-5 sm:mb-6">
@@ -456,8 +543,7 @@ export default function LandingPage() {
                                 </h3>
                             </div>
 
-                            <motion.select
-                                whileFocus={{ scale: 1.02 }}
+                            <select
                                 className="w-full mb-6 sm:mb-8 px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black text-sm sm:text-base"
                             >
                                 <option>Choose your industry</option>
@@ -467,7 +553,7 @@ export default function LandingPage() {
                                 <option>Real Estate</option>
                                 <option>Education</option>
                                 <option>Finance</option>
-                            </motion.select>
+                            </select>
 
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
                                 {[
@@ -478,44 +564,29 @@ export default function LandingPage() {
                                     { emoji: "🎓", label: "Education" },
                                     { emoji: "💰", label: "Finance" },
                                 ].map((item, i) => (
-                                    <motion.div
-                                        key={item.label}
-                                        initial={{ opacity: 0, scale: 0.6, y: 20 }}
-                                        whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                                        whileHover={{ y: -6, scale: 1.05 }}
-                                        transition={{ delay: i * 0.05 }}
-                                        viewport={{ once: true }}
+                                    <div
                                         className="border border-gray-200 rounded-xl sm:rounded-2xl py-4 sm:py-6 flex flex-col items-center justify-center hover:shadow-lg transition"
                                     >
-                                        <motion.span
-                                            animate={{ rotate: [0, 8, -8, 0] }}
-                                            transition={{ repeat: Infinity, duration: 5 }}
+                                        <span
                                             className="text-xl sm:text-2xl mb-1 sm:mb-2"
                                         >
                                             {item.emoji}
-                                        </motion.span>
+                                        </span>
                                         <span className="text-xs sm:text-sm font-medium text-center">
                                             {item.label}
                                         </span>
-                                    </motion.div>
+                                    </div>
                                 ))}
                             </div>
-                        </motion.div>
+                        </div>
 
                         {/* CARD 2 */}
-                        <motion.div
-                            initial={{ opacity: 0, x: 60, rotate: 2 }}
-                            whileInView={{ opacity: 1, x: 0, rotate: 0 }}
-                            whileHover={{ rotate: -1, scale: 1.02 }}
-                            transition={{ duration: 0.6 }}
-                            viewport={{ once: true }}
+                        <div
                             className="border border-gray-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-sm bg-gray-100 relative overflow-hidden"
                         >
                             {/* subtle animated glow */}
-                            <motion.div
+                            <div
                                 className="absolute -top-20 -right-20 w-60 h-60 bg-purple-300 rounded-full blur-3xl opacity-30"
-                                animate={{ scale: [1, 1.3, 1] }}
-                                transition={{ repeat: Infinity, duration: 6 }}
                             />
 
                             <div className="flex items-center gap-3 mb-5 sm:mb-6">
@@ -527,26 +598,23 @@ export default function LandingPage() {
                                 </h3>
                             </div>
 
-                            <motion.textarea
-                                whileFocus={{ scale: 1.02 }}
+                            <textarea
                                 className="w-full min-h-[140px] sm:min-h-[180px] p-4 bg-white rounded-2xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black resize-none text-sm sm:text-base mb-4"
                                 placeholder="I'm an architect- generate 365 instagram posts, reels and festival creatives."
                             />
 
                             <div className="flex flex-col sm:flex-row gap-3 mb-4">
-                                <motion.button
-                                    whileHover={{ y: -3 }}
+                                <button
                                     className="px-4 py-2 rounded-lg bg-gray-300 text-black text-xs sm:text-sm font-medium"
                                 >
                                     Create Health Photo
-                                </motion.button>
+                                </button>
 
-                                <motion.button
-                                    whileHover={{ y: -3 }}
+                                <button
                                     className="px-4 py-2 bg-gray-300 rounded-lg border border-black text-xs sm:text-sm font-medium"
                                 >
                                     Create Reels Photo
-                                </motion.button>
+                                </button>
                             </div>
 
                             <p className="text-xs sm:text-sm text-gray-500">
@@ -554,15 +622,12 @@ export default function LandingPage() {
                             </p>
 
                             {/* Power CTA Button */}
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                animate={{ boxShadow: ["0 0 0px", "0 0 30px rgba(0,0,0,0.25)", "0 0 0px"] }}
-                                transition={{ repeat: Infinity, duration: 3 }}
+                            <button
                                 className="w-full mt-6 sm:mt-8 py-3 sm:py-4 rounded-2xl bg-gradient-to-r from-gray-300 to-gray-500 text-white text-base sm:text-lg font-semibold"
                             >
                                 Generate 365 Days of Content
-                            </motion.button>
-                        </motion.div>
+                            </button>
+                        </div>
 
                     </div>
                 </div>
@@ -571,63 +636,42 @@ export default function LandingPage() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
                     {/* Floating Badge */}
-                    <motion.div
+                    <div
                         className="flex justify-center mb-5 sm:mb-6"
-                        initial={{ opacity: 0, y: -30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
                     >
-                        <motion.span
-                            animate={{ y: [0, -6, 0] }}
-                            transition={{ duration: 3, repeat: Infinity }}
+                        <span
                             className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 text-white text-xs sm:text-sm font-semibold shadow-lg"
                         >
-                            <motion.div
-                                animate={{ rotate: [0, 10, -10, 0] }}
-                                transition={{ duration: 4, repeat: Infinity }}
+                            <div
+
                             >
                                 <SparklesIcon className="w-4 h-4 text-white" />
-                            </motion.div>
+                            </div>
                             10,000+ Professional Templates
-                        </motion.span>
-                    </motion.div>
+                        </span>
+                    </div>
 
                     {/* Title */}
-                    <motion.h2
+                    <h2
                         className="text-2xl sm:text-3xl md:text-5xl text-center text-black mb-3 sm:mb-4"
-                        initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
-                        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                        transition={{ duration: 0.7 }}
-                        viewport={{ once: true }}
                     >
                         Browse Our Library
-                    </motion.h2>
+                    </h2>
 
                     {/* Subtitle */}
-                    <motion.p
+                    <p
                         className="text-center text-gray-600 text-sm sm:text-base max-w-2xl mx-auto mb-10 sm:mb-16 px-2"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                        viewport={{ once: true }}
                     >
                         Industry-specific templates that update instantly based on your selection
-                    </motion.p>
+                    </p>
 
                     {/* Main Card */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.96 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5 }}
-                        viewport={{ once: true }}
+                    <div
                         className="relative bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl border border-gray-200 overflow-hidden"
                     >
                         {/* subtle animated gradient sweep */}
-                        <motion.div
+                        <div
                             className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                            animate={{ x: ["-100%", "100%"] }}
-                            transition={{ duration: 6, repeat: Infinity }}
                         />
 
                         {/* Top Controls */}
@@ -636,14 +680,8 @@ export default function LandingPage() {
                             {/* Tabs */}
                             <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
                                 {["Images", "Reels", "Festivals & Occasions"].map((tab, i) => (
-                                    <motion.button
-                                        key={tab}
-                                        whileHover={{ y: -2 }}
-                                        whileTap={{ scale: 0.96 }}
-                                        initial={{ opacity: 0, y: 15 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: i * 0.05 }}
-                                        viewport={{ once: true }}
+                                    <button
+
                                         className={`whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition
               ${i === 0
                                                 ? "bg-black text-white shadow-lg"
@@ -651,21 +689,20 @@ export default function LandingPage() {
                                             }`}
                                     >
                                         {tab}
-                                    </motion.button>
+                                    </button>
                                 ))}
                             </div>
 
                             {/* Search + Dropdown */}
                             <div className="flex flex-col sm:flex-row gap-4">
-                                <motion.input
-                                    whileFocus={{ scale: 1.02 }}
+                                <input
+
                                     type="text"
                                     placeholder="Search templates"
                                     className="w-full px-4 py-2 rounded-xl bg-white text-gray-800 placeholder-gray-400 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
                                 />
 
-                                <motion.select
-                                    whileFocus={{ scale: 1.02 }}
+                                <select
                                     className="w-full sm:w-auto px-4 py-2 rounded-xl bg-white text-gray-800 border border-gray-300 focus:outline-none text-sm"
                                 >
                                     <option>Food & Beverages</option>
@@ -673,36 +710,17 @@ export default function LandingPage() {
                                     <option>Fashion</option>
                                     <option>Real Estate</option>
                                     <option>Education</option>
-                                </motion.select>
+                                </select>
                             </div>
                         </div>
 
                         {/* Templates Grid */}
-                        <motion.div
+                        <div
                             className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6 relative z-10"
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                            variants={{
-                                hidden: {},
-                                visible: {
-                                    transition: { staggerChildren: 0.05 },
-                                },
-                            }}
                         >
                             {Array.from({ length: 15 }).map((_, i) => (
-                                <motion.div
-                                    key={i}
-                                    variants={{
-                                        hidden: { opacity: 0, y: 40, scale: 0.9 },
-                                        visible: { opacity: 1, y: 0, scale: 1 },
-                                    }}
-                                    whileHover={{
-                                        scale: 1.06,
-                                        rotateX: 6,
-                                        rotateY: -6,
-                                    }}
-                                    transition={{ type: "spring", stiffness: 200 }}
+                                <div
+
                                     className="relative aspect-square rounded-xl sm:rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-xl transition-all"
                                 >
                                     <span className="absolute top-2 right-2 px-2 sm:px-3 py-1 rounded-full bg-white text-gray-400 text-[10px] sm:text-xs font-semibold shadow">
@@ -710,80 +728,59 @@ export default function LandingPage() {
                                     </span>
 
                                     {i < 4 ? (
-                                        <motion.img
+                                        <img
                                             src={`/templates/template-${i + 1}.jpg`}
                                             alt={`Template ${i + 1}`}
                                             className="w-full h-full object-cover rounded-xl sm:rounded-2xl"
-                                            whileHover={{ scale: 1.1 }}
-                                            transition={{ duration: 0.4 }}
+
                                         />
                                     ) : (
                                         <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs sm:text-sm text-center px-2">
                                             Template Preview
                                         </div>
                                     )}
-                                </motion.div>
+                                </div>
                             ))}
-                        </motion.div>
-                    </motion.div>
+                        </div>
+                    </div>
                 </div>
             </section>
             <section className="py-24 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto px-6 text-center">
 
                     {/* Gradient Badge with Floating Particle Motion */}
-                    <motion.div
+                    <div
                         className="flex justify-center mb-6"
-                        initial={{ opacity: 0, y: -30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
                     >
-                        <motion.span
-                            animate={{ y: [0, -6, 0], rotate: [0, 5, -5, 0] }}
-                            transition={{ repeat: Infinity, duration: 3 }}
+                        <span
                             className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white text-sm font-semibold shadow-lg"
                         >
-                            <motion.div
-                                animate={{ rotate: [0, 20, -20, 0], scale: [1, 1.2, 1] }}
-                                transition={{ repeat: Infinity, duration: 4 }}
+                            <div
                             >
                                 <SparklesIcon className="w-4 h-4 text-white" />
-                            </motion.div>
+                            </div>
                             Built for Every Industry
-                        </motion.span>
-                    </motion.div>
+                        </span>
+                    </div>
 
                     {/* Title + Subtitle */}
-                    <motion.h2
+                    <h2
                         className="text-4xl md:text-5xl text-black mb-4"
-                        initial={{ opacity: 0, y: 60, rotateX: 20, filter: "blur(10px)" }}
-                        whileInView={{ opacity: 1, y: 0, rotateX: 0, filter: "blur(0px)" }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
+
                     >
                         Who We Help
-                    </motion.h2>
+                    </h2>
 
-                    <motion.p
+                    <p
                         className="text-gray-600 max-w-2xl mx-auto mb-16"
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2, duration: 0.6 }}
-                        viewport={{ once: true }}
+
                     >
                         Industry-specific content automation for businesses of all sizes
-                    </motion.p>
+                    </p>
 
                     {/* Cards Grid */}
-                    <motion.div
+                    <div
                         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={{
-                            visible: { transition: { staggerChildren: 0.07 } },
-                        }}
                     >
                         {[
                             { title: "Health & Fitness", emoji: "💪" },
@@ -799,94 +796,54 @@ export default function LandingPage() {
                             { title: "Beauty, Salon & Wellness", emoji: "💅" },
                             { title: "Retail & E-Commerce", emoji: "🛒" },
                         ].map((item, index) => (
-                            <motion.div
-                                key={index}
-                                variants={{
-                                    hidden: {
-                                        opacity: 0,
-                                        x: 100 * Math.sin(index),
-                                        y: 100 * Math.cos(index),
-                                        scale: 0.6,
-                                        rotate: -20,
-                                    },
-                                    visible: {
-                                        opacity: 1,
-                                        x: 0,
-                                        y: 0,
-                                        scale: 1,
-                                        rotate: 0,
-                                        transition: {
-                                            type: "spring",
-                                            stiffness: 120,
-                                            damping: 18,
-                                        },
-                                    },
-                                }}
-                                whileHover={{
-                                    scale: 1.04,
-                                    rotateX: 6,
-                                    rotateY: -6,
-                                    y: -4,
-                                    boxShadow: "0 15px 35px rgba(0,0,0,0.15)",
-                                }}
+                            <div
                                 className="rounded-3xl p-6 bg-white border border-gray-200 text-left cursor-pointer relative overflow-hidden"
                             >
                                 {/* Emoji with micro-pulse */}
-                                <motion.div
+                                <div
                                     className="text-4xl mb-4"
-                                    animate={{ scale: [1, 1.2, 1] }}
-                                    transition={{ repeat: Infinity, duration: 2 }}
+
                                 >
                                     {item.emoji}
-                                </motion.div>
+                                </div>
 
                                 {/* Title */}
-                                <motion.h3
+                                <h3
                                     className="text-black mb-4"
-                                    initial={{ y: 20, opacity: 0 }}
-                                    whileInView={{ y: 0, opacity: 1 }}
-                                    transition={{ delay: 0.1, duration: 0.5 }}
                                 >
                                     {item.title}
-                                </motion.h3>
+                                </h3>
 
                                 {/* List */}
-                                <motion.ul
+                                <ul
                                     className="text-sm text-gray-600 space-y-2 mb-4"
-                                    initial={{ y: 20, opacity: 0 }}
-                                    whileInView={{ y: 0, opacity: 1 }}
-                                    transition={{ delay: 0.15, duration: 0.5 }}
+
                                 >
                                     <li>• Daily social media posts</li>
                                     <li>• Reels & short videos</li>
                                     <li>• Festival & promo creatives</li>
-                                </motion.ul>
+                                </ul>
 
                                 {/* More Link */}
-                                <motion.a
+                                <a
                                     href="#"
                                     className="text-sm font-medium text-blue-500 hover:text-black-600"
-                                    whileHover={{ x: 3, scale: 1.05 }}
+
                                 >
                                     +5 more
-                                </motion.a>
-                            </motion.div>
+                                </a>
+                            </div>
                         ))}
-                    </motion.div>
+                    </div>
 
                     {/* Bottom CTA Button */}
-                    <motion.div className="flex justify-center">
-                        <motion.button
+                    <div className="flex justify-center">
+                        <button
                             className="px-10 h-14 rounded-full bg-black text-white text-sm font-semibold"
-                            whileHover={{
-                                scale: 1.05,
-                                boxShadow: "0 0 20px rgba(255,140,0,0.5), 0 0 40px rgba(255,70,0,0.3)",
-                            }}
-                            transition={{ type: "spring", stiffness: 300 }}
                         >
                             Find Your Industry
-                        </motion.button>
-                    </motion.div>
+                        </button>
+                    </div>
                 </div>
             </section>
 
@@ -898,224 +855,70 @@ export default function LandingPage() {
             <section className="relative py-32 px-6 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 overflow-hidden">
 
                 {/* Animated Glow Background */}
-                <motion.div
-                    animate={{ scale: [1, 1.25, 1], opacity: [0.25, 0.6, 0.25] }}
-                    transition={{ duration: 10, repeat: Infinity }}
+                <div
                     className="absolute top-0 right-0 w-[750px] h-[750px] bg-purple-400 rounded-full blur-[140px]"
                 />
 
-                <motion.div
-                    animate={{ scale: [1, 1.35, 1], opacity: [0.2, 0.5, 0.2] }}
-                    transition={{ duration: 12, repeat: Infinity }}
+                <div
                     className="absolute bottom-0 left-0 w-[650px] h-[650px] bg-blue-400 rounded-full blur-[140px]"
                 />
 
-                {/* Floating Social Media Bubbles */}
-                <div className="absolute inset-0">
-                    {icons.map((Icon, i) => {
-                        const top = Math.random() * 90;
-                        const left = Math.random() * 90;
-
-                        return (
-                            <motion.div
-                                key={i}
-                                initial={{
-                                    opacity: 0,
-                                    scale: 0.6,
-                                    y: 80,
-                                }}
-                                animate={{
-                                    opacity: 1,
-                                    scale: [1, 1.15, 1],
-                                    y: [0, -40, 0],
-                                    x: [0, 20, -20, 0],
-                                    rotate: [0, 10, -10, 0],
-                                }}
-                                transition={{
-                                    duration: 6 + i,
-                                    repeat: Infinity,
-                                    delay: i * 0.2,
-                                }}
-                                className="absolute group cursor-pointer"
-                                style={{
-                                    top: `${top}%`,
-                                    left: `${left}%`,
-                                }}
-                            >
-                                <div className="text-white text-2xl bg-white/10 backdrop-blur-lg p-4 rounded-full shadow-xl transition-all duration-300 group-hover:scale-125 group-hover:bg-white/20 group-hover:shadow-[0_0_30px_rgba(255,255,255,0.6)]">
-                                    <Icon />
-                                </div>
-                            </motion.div>
-                        );
-                    })}
-                </div>
-
                 {/* Orbiting Icons Layer */}
-                <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                    className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                >
-                    <div className="w-[600px] h-[600px] border border-white/10 rounded-full relative">
-                        {icons.slice(0, 6).map((Icon, i) => (
-                            <div
-                                key={i}
-                                className="absolute"
-                                style={{
-                                    top: "50%",
-                                    left: "50%",
-                                    transform: `rotate(${i * 60}deg) translate(300px) rotate(-${i * 60}deg)`,
-                                }}
-                            >
-                                <div className="text-white/80 bg-white/10 p-3 rounded-full backdrop-blur-md">
-                                    <Icon />
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </motion.div>
+
 
                 <div className="max-w-7xl mx-auto text-center relative z-10">
 
                     {/* Title Animation */}
-                    <motion.h2
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.9 }}
+                    <h2
                         className="text-3xl md:text-4xl font-semibold text-white mb-6 leading-tight"
                     >
                         Generate Content Using 10,000+ <br />
                         AI Prompts
-                    </motion.h2>
+                    </h2>
 
                     {/* Subtitle */}
-                    <motion.p
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2, duration: 0.8 }}
+                    <p
                         className="md:text-xl text-white/90 mb-12"
                     >
                         In any tone of voice, for any industry
-                    </motion.p>
+                    </p>
 
                     {/* CTA Button */}
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.85 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.3, duration: 0.7 }}
+                    <div
                     >
                         <Link
                             href="/sign-up"
                             className="inline-flex items-center justify-center px-12 py-4 rounded-full bg-white text-blue-600 text-lg hover:scale-110 hover:shadow-[0_20px_60px_rgba(0,0,0,0.4)] transition-all duration-300 shadow-xl"
                         >
-                            <SparklesIcon className="w-6 h-6 text-blue-600 mr-2 animate-pulse" />
+
                             Create My Content
                         </Link>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
             <section className="py-24 bg-white relative overflow-hidden">
                 {/* Animated Content Flow Lines */}
-                <div className="absolute inset-0 pointer-events-none">
-                    {[...Array(12)].map((_, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ x: -200, opacity: 0 }}
-                            animate={{
-                                x: ["-20%", "110%"],
-                                opacity: [0, 1, 1, 0],
-                            }}
-                            transition={{
-                                duration: 6 + i,
-                                repeat: Infinity,
-                                delay: i * 0.8,
-                                ease: "linear",
-                            }}
-                            className="absolute h-2 w-32 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-sm"
-                            style={{
-                                top: `${10 + i * 7}%`,
-                            }}
-                        />
-                    ))}
-                </div>
+
 
                 <div className="max-w-6xl mx-auto px-6 text-center relative z-10">
 
                     {/* Title */}
-                    <motion.h2
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7 }}
+                    <h2
                         className="text-4xl md:text-3xl text-black mb-4 font-semibold"
                     >
                         Follow Us — Where We Post the Future
-                    </motion.h2>
+                    </h2>
 
                     {/* Subtitle */}
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
+                    <p
                         className="text-gray-600 mb-12"
                     >
                         Join our community for tips, updates, and inspiration
-                    </motion.p>
+                    </p>
 
-                    {/* Social Icons */}
-                    <div className="flex items-center justify-center gap-8 flex-wrap">
-                        {socials.map((item, index) => (
-                            <motion.a
-                                key={index}
-                                href="#"
-                                aria-label={item.label}
-                                initial={{ opacity: 0, y: 40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                                whileHover={{
-                                    scale: 1.2,
-                                    rotate: 6,
-                                }}
-                                className="relative group w-16 h-16 flex items-center justify-center rounded-full border border-gray-300 text-black bg-white transition-all duration-300 shadow-md"
-                            >
-                                {/* Glow Effect */}
-                                <span className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-20 blur-xl transition" />
 
-                                {/* Icon */}
-                                <span className="text-2xl relative z-10 group-hover:text-blue-600 transition">
-                                    {item.icon}
-                                </span>
-                            </motion.a>
-                        ))}
-                    </div>
 
-                    {/* Flowing Content Particles */}
-                    <div className="absolute inset-0 pointer-events-none">
-                        {[...Array(18)].map((_, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{
-                                    y: 40,
-                                    opacity: 0,
-                                    x: Math.random() * 300 - 150,
-                                }}
-                                animate={{
-                                    y: -200,
-                                    opacity: [0, 1, 0],
-                                }}
-                                transition={{
-                                    duration: 6 + Math.random() * 4,
-                                    repeat: Infinity,
-                                    delay: i * 0.4,
-                                }}
-                                className="absolute w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full"
-                                style={{
-                                    left: `${40 + Math.random() * 20}%`,
-                                    bottom: "0%",
-                                }}
-                            />
-                        ))}
-                    </div>
                 </div>
             </section>{/* Footer */}
             <footer className="bg-black py-16 md:py-20 border-t border-gray-800">

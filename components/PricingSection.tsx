@@ -6,27 +6,6 @@ import Link from "next/link";
 export default function PricingSection() {
     const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
 
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const card = e.currentTarget;
-        const rect = card.getBoundingClientRect();
-
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-        const rotateX = (y - centerY) / 18;
-        const rotateY = (centerX - x) / 18;
-
-        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.04)`;
-    };
-
-    const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-        const card = e.currentTarget;
-        card.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
-    };
-
     return (
         <section
             id="pricing"
@@ -52,7 +31,7 @@ export default function PricingSection() {
                             }
                         >
                             <div
-                                className={`absolute top-1 left-1 w-16 h-8 bg-white rounded-full shadow transition-transform duration-300 flex items-center justify-center text-black font-medium text-sm ${billingCycle === "yearly" ? "translate-x-16" : ""
+                                className={`absolute top-1 left-1 w-16 h-8 bg-white rounded-full shadow flex items-center justify-center text-black font-medium text-sm ${billingCycle === "yearly" ? "translate-x-16" : ""
                                     }`}
                             >
                                 {billingCycle === "monthly" ? "Monthly" : "Yearly"}
@@ -66,16 +45,13 @@ export default function PricingSection() {
                 </div>
 
                 {/* Pricing Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 perspective-[1500px]">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
 
                     {/* Starter Plan */}
                     <div
-                        onMouseMove={handleMouseMove}
-                        onMouseLeave={handleMouseLeave}
-                        className="bg-white border border-gray-200 rounded-3xl p-6 md:p-10 shadow-lg transition-transform duration-300 will-change-transform hover:shadow-2xl"
-                        style={{ transformStyle: "preserve-3d" }}
+                        className="bg-white border border-gray-200 rounded-3xl p-6 md:p-10 shadow-lg"
                     >
-                        <div style={{ transform: "translateZ(40px)" }}>
+                        <div>
                             <h3 className="text-2xl text-black mb-1">Starter</h3>
                             <p className="text-gray-500 mb-6">
                                 For Individual & Freelancer
@@ -96,7 +72,7 @@ export default function PricingSection() {
                             <div className="flex justify-center mb-8">
                                 <Link
                                     href="/signup"
-                                    className="w-full sm:w-64 px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-center hover:scale-105 transition"
+                                    className="w-full sm:w-64 px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-center"
                                 >
                                     Get Started
                                 </Link>
@@ -122,12 +98,9 @@ export default function PricingSection() {
 
                     {/* Growth Plan */}
                     <div
-                        onMouseMove={handleMouseMove}
-                        onMouseLeave={handleMouseLeave}
-                        className="relative bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl p-6 md:p-10 shadow-xl transition-transform duration-300 will-change-transform hover:shadow-2xl"
-                        style={{ transformStyle: "preserve-3d" }}
+                        className="relative bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl p-6 md:p-10 shadow-xl"
                     >
-                        <div style={{ transform: "translateZ(50px)" }}>
+                        <div>
                             <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                                 <span className="px-4 py-1 rounded-full bg-yellow-400 text-black text-xs">
                                     Most Popular
@@ -154,7 +127,7 @@ export default function PricingSection() {
                             <div className="flex justify-center mb-8">
                                 <Link
                                     href="/signup"
-                                    className="w-full sm:w-64 px-8 py-3 rounded-full bg-white text-blue-600 text-center hover:scale-105 transition"
+                                    className="w-full sm:w-64 px-8 py-3 rounded-full bg-white text-blue-600 text-center"
                                 >
                                     Get Started
                                 </Link>
@@ -188,7 +161,7 @@ export default function PricingSection() {
 
                 <Link
                     href="/signup"
-                    className="inline-flex items-center justify-center w-full sm:w-auto px-10 py-4 rounded-full bg-black text-white text-lg hover:scale-105 hover:bg-gray-900 transition"
+                    className="inline-flex items-center justify-center w-full sm:w-auto px-10 py-4 rounded-full bg-black text-white text-lg"
                 >
                     Start Your Free Trial
                 </Link>
