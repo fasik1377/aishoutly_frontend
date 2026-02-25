@@ -88,7 +88,7 @@ export default function LandingPage() {
 
                     {/* Logo */}
                     <div className="relative w-28 h-10 sm:w-40 sm:h-14">
-                        <Image src="images/logo.png" alt="Logo" fill className="object-contain" />
+                        <Image src="/images/logo.png" alt="Logo" fill className="object-contain" />
                     </div>
 
                     {/* Desktop Links */}
