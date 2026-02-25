@@ -62,7 +62,7 @@ export default function DashboardPage() {
             {/* Sidebar */}
             <aside className="w-64 bg-white border-r px-6 py-6">
                 <Image
-                    src="images/logo.png"
+                    src="/images/logo.png"
                     alt="Logo"
                     width={140}
                     height={60}

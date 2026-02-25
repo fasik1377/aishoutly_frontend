@@ -27,7 +27,7 @@ export default function BrandSetupPage() {
             {/* Logo */}
             <div className="mb-6">
                 <Image
-                    src="images/logo.png"
+                    src="/images/logo.png"
                     alt="Logo"
                     width={180}
                     height={120}

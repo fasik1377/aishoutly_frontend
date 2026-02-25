@@ -13,7 +13,7 @@ export default function CreateAccountPage() {
             {/* Logo */}
             <div className="mb-5">
                 <Image
-                    src="images/logo.png"
+                    src="/images/logo.png"
                     alt="Logo"
                     width={180}
                     height={120}

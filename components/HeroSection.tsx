@@ -102,7 +102,7 @@ export default function HeroSection() {
 
         // Images
         const logo = new Image();
-        logo.src = "images/logo.png";
+        logo.src = "/images/logo.png";
 
 
         const icons: Record<string, HTMLImageElement> = {
@@ -460,7 +460,7 @@ export default function HeroSection() {
                         transition={{ duration: 4, repeat: Infinity }}
                         className="w-24 h-24 rounded-full bg-white shadow-xl border flex items-center justify-center"
                     >
-                        <img src="images/logo.png" className="w-20 h-20 object-contain" />
+                        <img src="/images/logo.png" className="w-20 h-20 object-contain" />
                     </motion.div>
                 </div>
                 {/* Orbit Icons */}
