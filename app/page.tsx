@@ -1012,7 +1012,7 @@ export default function LandingPage() {
                     <div className="md:col-span-1">
                         <div className="flex items-center gap-2 mb-2">
                             {/* Larger logo with white rounded background */}
-                            <div className="relative w-30 h-20 rounded-xl p-2">
+                            <div className="relative w-60 h-30 rounded-xl p-2">
                                 <Image
                                     src="/images/logo2.png"
                                     alt="ShoutlyAI Logo"
@@ -1021,7 +1021,6 @@ export default function LandingPage() {
                                 />
                             </div>
                             {/* Slightly smaller text next to logo */}
-                            <span className="text-lg font-black tracking-tight text-white">ShoutlyAI</span>
                         </div>
                         <p className="text-sm font-medium mb-4">
                             AI-powered social media automation.<br />
