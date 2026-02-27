@@ -172,21 +172,43 @@ export default function LandingPage() {
                     <div className="hidden md:flex items-center gap-8 text-sm font-medium text-black">
                         <Link href="/">Home</Link>
                         <Link href="#features">Features</Link>
+                        <Link href="#who-we-help">Who We Help</Link>
                         <Link href="#pricing">Pricing</Link>
-                        <Link href="#early-access">Get Early Access</Link>
+
+                        {/* Resources Dropdown */}
+                        <div className="relative group">
+                            <span className="cursor-pointer">Resources</span>
+                            <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+                                <Link href="/blog" className="block px-4 py-2 hover:bg-gray-100">Blog</Link>
+                                <Link href="/help-center" className="block px-4 py-2 hover:bg-gray-100">Help Center / FAQ</Link>
+                                <Link href="/case-studies" className="block px-4 py-2 hover:bg-gray-100">Case Studies</Link>
+                                <Link href="/free-tools" className="block px-4 py-2 hover:bg-gray-100">Free Tools</Link>
+                            </div>
+                        </div>
+
+                        {/* Company Dropdown */}
+                        <div className="relative group">
+                            <span className="cursor-pointer">Company</span>
+                            <div className="absolute top-full left-0 mt-2 w-44 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+                                <Link href="/about" className="block px-4 py-2 hover:bg-gray-100">About Us</Link>
+                                <Link href="/contact" className="block px-4 py-2 hover:bg-gray-100">Contact</Link>
+                                <Link href="/press" className="block px-4 py-2 hover:bg-gray-100">Press</Link>
+                                <Link href="/careers" className="block px-4 py-2 hover:bg-gray-100">Careers</Link>
+                            </div>
+                        </div>
                     </div>
 
                     {/* Right side (Desktop only) */}
                     <div className="hidden md:flex text-black items-center gap-4">
                         <Link href="/sign-in" className="text-sm">
-                            Log in
+                            Log In
                         </Link>
 
                         <Link
                             href="/sign-up"
-                            className="px-4 py-2 bg-black text-white rounded-full text-xs"
+                            className="px-5 py-2 bg-black text-white rounded-full text-sm font-medium"
                         >
-                            Sign Up Free
+                            Sign Up / Free Trial
                         </Link>
                     </div>
 
@@ -202,37 +224,28 @@ export default function LandingPage() {
                 {/* Mobile Menu */}
                 {menuOpen && (
                     <div className="md:hidden bg-white border-t px-6 py-6 space-y-5">
-                        <Link
-                            href="/"
-                            className="block text-base text-black font-medium"
-                            onClick={() => setMenuOpen(false)}
-                        >
-                            Home
-                        </Link>
+                        <Link href="/" className="block text-base text-black font-medium" onClick={() => setMenuOpen(false)}>Home</Link>
+                        <Link href="#features" className="block text-base text-black font-medium" onClick={() => setMenuOpen(false)}>Features</Link>
+                        <Link href="#who-we-help" className="block text-base text-black font-medium" onClick={() => setMenuOpen(false)}>Who We Help</Link>
+                        <Link href="#pricing" className="block text-base text-black font-medium" onClick={() => setMenuOpen(false)}>Pricing</Link>
 
-                        <Link
-                            href="#features"
-                            className="block text-base text-black font-medium"
-                            onClick={() => setMenuOpen(false)}
-                        >
-                            Features
-                        </Link>
+                        {/* Resources */}
+                        <div className="space-y-2 border border-gray-200 bg-white rounded-lg p-3">
+                            <p className="font-semibold">Resources</p>
+                            <Link href="/blog" className="block text-sm text-gray-700" onClick={() => setMenuOpen(false)}>Blog</Link>
+                            <Link href="/help-center" className="block text-sm text-gray-700" onClick={() => setMenuOpen(false)}>Help Center / FAQ</Link>
+                            <Link href="/case-studies" className="block text-sm text-gray-700" onClick={() => setMenuOpen(false)}>Case Studies</Link>
+                            <Link href="/free-tools" className="block text-sm text-gray-700" onClick={() => setMenuOpen(false)}>Free Tools</Link>
+                        </div>
 
-                        <Link
-                            href="#pricing"
-                            className="block text-base text-black font-medium"
-                            onClick={() => setMenuOpen(false)}
-                        >
-                            Pricing
-                        </Link>
-
-                        <Link
-                            href="#early-access"
-                            className="block text-base text-black font-medium"
-                            onClick={() => setMenuOpen(false)}
-                        >
-                            Get Early Access
-                        </Link>
+                        {/* Company */}
+                        <div className="space-y-2 border border-gray-200 bg-white rounded-lg p-3">
+                            <p className="font-semibold">Company</p>
+                            <Link href="/about" className="block text-sm text-gray-700" onClick={() => setMenuOpen(false)}>About Us</Link>
+                            <Link href="/contact" className="block text-sm text-gray-700" onClick={() => setMenuOpen(false)}>Contact</Link>
+                            <Link href="/press" className="block text-sm text-gray-700" onClick={() => setMenuOpen(false)}>Press</Link>
+                            <Link href="/careers" className="block text-sm text-gray-700" onClick={() => setMenuOpen(false)}>Careers</Link>
+                        </div>
 
                         {/* Divider */}
                         <div className="border-t pt-4 space-y-3">
@@ -241,15 +254,15 @@ export default function LandingPage() {
                                 className="block text-center text-black text-sm font-medium"
                                 onClick={() => setMenuOpen(false)}
                             >
-                                Log in
+                                Log In
                             </Link>
 
                             <Link
                                 href="/sign-up"
-                                className="block text-center bg-black text-white py-3 rounded-full text-sm"
+                                className="block text-center bg-black text-white py-3 rounded-full text-sm font-medium"
                                 onClick={() => setMenuOpen(false)}
                             >
-                                Sign Up Free
+                                Sign Up / Free Trial
                             </Link>
                         </div>
                     </div>
@@ -992,80 +1005,137 @@ export default function LandingPage() {
 
                 </div>
             </section>{/* Footer */}
-            <footer className="bg-black py-16 md:py-20 border-t border-gray-800">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 md:gap-12">
+            <footer className="bg-black text-gray-400 py-16 md:py-20 border-t border-gray-800">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-6 gap-10 md:gap-12">
 
-                    {/* Brand + Social */}
-                    <div className="sm:col-span-2">
-                        {/* Logo */}
-                        <div className="flex items-center gap-2 mb-6">
-                            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-black font-black text-lg">
-                                S
+                    {/* Column 1: Brand & Social */}
+                    <div className="md:col-span-1">
+                        <div className="flex items-center gap-2 mb-2">
+                            {/* Larger logo with white rounded background */}
+                            <div className="relative w-30 h-20 rounded-xl p-2">
+                                <Image
+                                    src="/images/logo2.png"
+                                    alt="ShoutlyAI Logo"
+                                    fill
+                                    className="object-contain opacity-80"
+                                />
                             </div>
-                            <span className="text-xl font-black tracking-tight text-white">
-                                Shoutly<span className="text-brand-500">.ai</span>
-                            </span>
+                            {/* Slightly smaller text next to logo */}
+                            <span className="text-lg font-black tracking-tight text-white">ShoutlyAI</span>
                         </div>
-
-                        <p className="text-gray-400 text-sm font-medium max-w-sm mb-8">
-                            Empowering creators and brands with AI-driven content tools that save time and amplify impact.
+                        <p className="text-sm font-medium mb-4">
+                            AI-powered social media automation.<br />
+                            One prompt → 365 days.
                         </p>
-
-                        {/* Social Icons */}
-                        <div className="flex gap-4">
-                            {[FaTwitter, FaInstagram, FaLinkedinIn, FaFacebookF, FaYoutube].map((Icon, i) => (
-                                <div
+                        <p className="font-semibold mb-2">Follow Us</p>
+                        <div className="flex gap-3">
+                            {[FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube].map((Icon, i) => (
+                                <a
                                     key={i}
-                                    className="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center text-gray-300 hover:bg-brand-500 hover:text-white transition-all cursor-pointer"
+                                    href="#"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center text-gray-300 hover:bg-brand-500 hover:text-white transition-all"
                                 >
-                                    <Icon className="w-5 h-5" />
-                                </div>
+                                    <Icon className="w-4 h-4" />
+                                </a>
                             ))}
                         </div>
                     </div>
 
-                    {/* Product Column */}
-                    <div>
-                        <h4 className="font-semibold text-white mb-5">Products</h4>
-                        <ul className="space-y-3 text-sm text-gray-400">
-                            <li><Link href="#" className="hover:text-white transition">Features</Link></li>
-                            <li><Link href="#" className="hover:text-white transition">Pricing</Link></li>
-                            <li><Link href="#" className="hover:text-white transition">Integrations</Link></li>
-                            <li><Link href="#" className="hover:text-white transition">Changelog</Link></li>
+                    {/* Column 2: Who We Help */}
+                    <div className="md:col-span-2">
+                        <h4 className="font-semibold text-white mb-2">Who We Help</h4>
+
+                        <div className="grid grid-cols-2 gap-4 text-sm text-gray-400">
+                            {/* Local Business / Professional Services */}
+                            <div>
+                                <p className="font-medium mb-1">🏢 Local Business</p>
+                                <ul className="space-y-1">
+                                    <li>• Real Estate</li>
+                                    <li>• Food & Beverage</li>
+                                    <li>• Retail / E‑comm</li>
+                                    <li>• Beauty & Wellness</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <p className="font-medium mb-1">💼 Professional Services</p>
+                                <ul className="space-y-1">
+                                    <li>• Finance & Legal</li>
+                                    <li>• Education & Coaching</li>
+                                    <li>• Healthcare</li>
+                                    <li>• Business Consulting</li>
+                                </ul>
+                            </div>
+
+                            {/* Lifestyle Brands / Specialized Industries */}
+                            <div>
+                                <p className="font-medium mb-1">🏋️ Lifestyle Brands</p>
+                                <ul className="space-y-1">
+                                    <li>• Health & Fitness</li>
+                                    <li>• Hospitality & Tourism</li>
+                                    <li>• Pet Services</li>
+                                    <li>• Nonprofits</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <p className="font-medium mb-1">🏗️ Specialized Industries</p>
+                                <ul className="space-y-1">
+                                    <li>• Construction & Trades</li>
+                                    <li>• Automotive</li>
+                                    <li>• Technology</li>
+                                    <li>• Home Services</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Column 3: Product */}
+                    <div className="md:col-span-1">
+                        <h4 className="font-semibold text-white mb-2">Product</h4>
+                        <ul className="space-y-2 text-sm">
+                            <li><Link href="#" className="hover:text-white transition">All Features</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">How It Works</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">10k+ Templates</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Platforms</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Plans & Pricing</Link></li>
                         </ul>
                     </div>
 
-                    {/* Industries Column */}
-                    <div>
-                        <h4 className="font-semibold text-white mb-5">Industries</h4>
-                        <ul className="space-y-3 text-sm text-gray-400">
-                            <li><Link href="#" className="hover:text-white transition">Health & Fitness</Link></li>
-                            <li><Link href="#" className="hover:text-white transition">Food & Beverage</Link></li>
-                            <li><Link href="#" className="hover:text-white transition">Education</Link></li>
-                            <li><Link href="#" className="hover:text-white transition">Real Estate</Link></li>
-                        </ul>
-                    </div>
-
-                    {/* Resources Column */}
-                    <div>
-                        <h4 className="font-semibold text-white mb-5">Resources</h4>
-                        <ul className="space-y-3 text-sm text-gray-400">
+                    {/* Column 4: Resources */}
+                    <div className="md:col-span-1">
+                        <h4 className="font-semibold text-white mb-2">Resources</h4>
+                        <ul className="space-y-2 text-sm">
                             <li><Link href="#" className="hover:text-white transition">Blog</Link></li>
                             <li><Link href="#" className="hover:text-white transition">Help Center</Link></li>
-                            <li><Link href="#" className="hover:text-white transition">Guides</Link></li>
-                            <li><Link href="#" className="hover:text-white transition">Case Studies</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Join Community</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Success Stories</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Free Editorial Calendar</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Industry Content Guides</Link></li>
                         </ul>
                     </div>
+
+                    {/* Column 5: Company */}
+                    <div className="md:col-span-1">
+                        <h4 className="font-semibold text-white mb-2">Company</h4>
+                        <ul className="space-y-2 text-sm">
+                            <li><Link href="#" className="hover:text-white transition">About Us</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Contact Us</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Press & Media</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Join Our Team</Link></li>
+                            <li><Link href="#" className="hover:text-white transition">Affiliate Program</Link></li>
+                        </ul>
+                    </div>
+
                 </div>
 
-                {/* Bottom Bar */}
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-12 md:mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
-                    <p className="text-gray-500 text-xs">
-                        © 2026 Shoutly AI Inc. All rights reserved.
-                    </p>
-                    <div className="flex gap-6 text-gray-500 text-xs">
+                {/* Bottom Legal Bar */}
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-12 md:mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-3 text-center md:text-left">
+                    <p className="text-gray-500 text-xs">© 2025 ShoutlyAI. All rights reserved.</p>
+                    <div className="flex gap-4 text-gray-500 text-xs flex-wrap justify-center md:justify-start">
                         <Link href="#" className="hover:text-white transition">Privacy Policy</Link>
                         <Link href="#" className="hover:text-white transition">Terms of Service</Link>
+                        <Link href="#" className="hover:text-white transition">Cookie Settings</Link>
                     </div>
                 </div>
             </footer>
