@@ -9,6 +9,7 @@ import IndustrySection from "@/components/IndustrySection";
 import PricingSection from "@/components/PricingSection";
 import { CheckCircle, ArrowRight, Star, Zap } from "lucide-react";
 import HeroSection from "@/components/HeroSection";
+import { useEffect } from "react";
 
 import {
     FaFacebookF,
@@ -50,8 +51,84 @@ export default function LandingPage() {
     ];
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [menuOpen, setMenuOpen] = useState(false);
 
+    const toggleVideo = () => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        if (video.paused) {
+            video.play();
+            setIsPlaying(true);
+        } else {
+            video.pause();
+            setIsPlaying(false);
+        }
+    };
+
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
+    const [images, setImages] = useState<any[]>([]);
+    const [etag, setEtag] = useState<string | null>(null);
+    const [loadingImages, setLoadingImages] = useState(false);
+
+    const [industries, setIndustries] = useState<any[]>([]);
+    const [loadingIndustries, setLoadingIndustries] = useState(true);
+
+    useEffect(() => {
+        const fetchImages = async () => {
+            setLoadingImages(true);
+
+            try {
+                let url =
+                    "https://ai-shoutly-backend.onrender.com/api/display-images";
+
+                if (selectedIndustry) {
+                    url += `?industryId=${selectedIndustry}`;
+                }
+
+                const res = await fetch(url, {
+                    headers: etag ? { "If-None-Match": etag } : {},
+                });
+
+                if (res.status === 304) {
+                    setLoadingImages(false);
+                    return;
+                }
+
+                const newEtag = res.headers.get("ETag");
+                if (newEtag) setEtag(newEtag);
+
+                const data = await res.json();
+
+                setImages(data.images || []);
+            } catch (error) {
+                console.error("Failed to fetch images:", error);
+            } finally {
+                setLoadingImages(false);
+            }
+        };
+
+        fetchImages();
+    }, [selectedIndustry]);
+
+    useEffect(() => {
+        const fetchIndustries = async () => {
+            try {
+                const res = await fetch(
+                    "https://ai-shoutly-backend.onrender.com/api/industries/with-subindustries"
+                );
+
+                const data = await res.json();
+                setIndustries(data);
+            } catch (error) {
+                console.error("Failed to fetch industries:", error);
+            } finally {
+                setLoadingIndustries(false);
+            }
+        };
+
+        fetchIndustries();
+    }, []);
     return (
         <div className="relative bg-white dark:bg-gray-950 font-arial min-h-screen text-gray-900 dark:text-white selection:text-white overflow-hidden">
             {/* GLOBAL FLOATING AI + SOCIAL MEDIA BUBBLES */}
@@ -432,38 +509,29 @@ export default function LandingPage() {
                             </div>
                         ))}
                     </div>
-
                     {/* Video Section */}
-                    <div
-                        className="relative max-w-4xl mx-auto mb-14 sm:mb-20"
-                    >
+                    <div className="relative max-w-4xl mx-auto mb-14 sm:mb-20">
                         <div className="relative aspect-video rounded-2xl sm:rounded-3xl overflow-hidden border border-gray-200 shadow-xl bg-black group">
 
                             <video
                                 ref={videoRef}
-                                className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
-                                src="videos/ai_video.mp4"
-                                poster="images/demo.jpg"
+                                className="w-full h-full object-cover cursor-pointer"
+                                src="videos/video.mp4"
+                                onClick={toggleVideo}
                             />
 
                             {!isPlaying && (
                                 <button
-                                    onClick={() => {
-                                        videoRef.current?.play();
-                                        setIsPlaying(true);
-                                    }}
+                                    onClick={toggleVideo}
                                     className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm"
                                 >
-                                    <div
-                                        className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white text-black flex items-center justify-center text-xl sm:text-2xl shadow-xl"
-                                    >
+                                    <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white text-black flex items-center justify-center text-xl sm:text-2xl shadow-xl">
                                         ▶
                                     </div>
                                 </button>
                             )}
                         </div>
                     </div>
-
                     {/* Feature Cards */}
                     <div
                         className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6"
@@ -542,17 +610,21 @@ export default function LandingPage() {
                                     Select your industry
                                 </h3>
                             </div>
-
                             <select
+                                onChange={(e) => setSelectedIndustry(e.target.value)}
                                 className="w-full mb-6 sm:mb-8 px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black text-sm sm:text-base"
                             >
-                                <option>Choose your industry</option>
-                                <option>Health</option>
-                                <option>Food</option>
-                                <option>Fashion</option>
-                                <option>Real Estate</option>
-                                <option>Education</option>
-                                <option>Finance</option>
+                                <option value="">Choose your industry</option>
+
+                                {loadingIndustries ? (
+                                    <option>Loading industries...</option>
+                                ) : (
+                                    industries.map((industry) => (
+                                        <option key={industry.id} value={industry.id}>
+                                            {industry.name}
+                                        </option>
+                                    ))
+                                )}
                             </select>
 
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
@@ -718,29 +790,28 @@ export default function LandingPage() {
                         <div
                             className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6 relative z-10"
                         >
-                            {Array.from({ length: 15 }).map((_, i) => (
-                                <div
+                            {loadingImages ? (
+                                <p className="text-center col-span-full">Loading templates...</p>
+                            ) : images.length === 0 ? (
+                                <p className="text-center col-span-full">No templates found</p>
+                            ) : (
+                                images.map((img, i) => (
+                                    <div
+                                        key={img.id}
+                                        className="relative aspect-square rounded-xl sm:rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-xl transition-all"
+                                    >
+                                        <span className="absolute top-2 right-2 px-2 sm:px-3 py-1 rounded-full bg-white text-gray-400 text-[10px] sm:text-xs font-semibold shadow">
+                                            #{i + 1}
+                                        </span>
 
-                                    className="relative aspect-square rounded-xl sm:rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-xl transition-all"
-                                >
-                                    <span className="absolute top-2 right-2 px-2 sm:px-3 py-1 rounded-full bg-white text-gray-400 text-[10px] sm:text-xs font-semibold shadow">
-                                        #{i + 1}
-                                    </span>
-
-                                    {i < 4 ? (
                                         <img
-                                            src={`templates/template-${i + 1}.jpg`}
-                                            alt={`Template ${i + 1}`}
+                                            src={img.file}
+                                            alt="Template"
                                             className="w-full h-full object-cover rounded-xl sm:rounded-2xl"
-
                                         />
-                                    ) : (
-                                        <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs sm:text-sm text-center px-2">
-                                            Template Preview
-                                        </div>
-                                    )}
-                                </div>
-                            ))}
+                                    </div>
+                                ))
+                            )}
                         </div>
                     </div>
                 </div>
