@@ -1131,7 +1131,7 @@ export default function LandingPage() {
 
                 {/* Bottom Legal Bar */}
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 mt-12 md:mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-3 text-center md:text-left">
-                    <p className="text-gray-500 text-xs">© 2025 ShoutlyAI. All rights reserved.</p>
+                    <p className="text-gray-500 text-xs">© 2026 ShoutlyAI. All rights reserved.</p>
                     <div className="flex gap-4 text-gray-500 text-xs flex-wrap justify-center md:justify-start">
                         <Link href="#" className="hover:text-white transition">Privacy Policy</Link>
                         <Link href="#" className="hover:text-white transition">Terms of Service</Link>
