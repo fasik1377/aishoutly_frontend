@@ -231,7 +231,7 @@ export default function LandingPage() {
 
                         {/* Resources */}
                         <div className="space-y-2 border border-gray-200 bg-white rounded-lg p-3">
-                            <p className="font-semibold">Resources</p>
+                            <p className="font-semibold text-black">Resources</p>
                             <Link href="/blog" className="block text-sm text-gray-700" onClick={() => setMenuOpen(false)}>Blog</Link>
                             <Link href="/help-center" className="block text-sm text-gray-700" onClick={() => setMenuOpen(false)}>Help Center / FAQ</Link>
                             <Link href="/case-studies" className="block text-sm text-gray-700" onClick={() => setMenuOpen(false)}>Case Studies</Link>
@@ -240,7 +240,7 @@ export default function LandingPage() {
 
                         {/* Company */}
                         <div className="space-y-2 border border-gray-200 bg-white rounded-lg p-3">
-                            <p className="font-semibold">Company</p>
+                            <p className="font-semibold text-black">Company</p>
                             <Link href="/about" className="block text-sm text-gray-700" onClick={() => setMenuOpen(false)}>About Us</Link>
                             <Link href="/contact" className="block text-sm text-gray-700" onClick={() => setMenuOpen(false)}>Contact</Link>
                             <Link href="/press" className="block text-sm text-gray-700" onClick={() => setMenuOpen(false)}>Press</Link>
