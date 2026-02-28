@@ -7,7 +7,7 @@ import { SparklesIcon } from "@heroicons/react/24/outline";
 import { useRef, useState } from "react";
 import IndustrySection from "@/components/IndustrySection";
 import PricingSection from "@/components/PricingSection";
-import { CheckCircle, ArrowRight, Star, Zap } from "lucide-react";
+import { CheckCircle, ArrowRight, Star, Zap, RefreshCcw } from "lucide-react";
 import HeroSection from "@/components/HeroSection";
 import { useEffect } from "react";
 
@@ -66,41 +66,74 @@ export default function LandingPage() {
     };
 
     const [menuOpen, setMenuOpen] = useState(false);
-    const [selectedIndustry, setSelectedIndustry] = useState<string | null>(null);
+    const [selectedIndustry, setSelectedIndustry] = useState<string>("");
+    const [subIndustries, setSubIndustries] = useState<any[]>([]);
     const [images, setImages] = useState<any[]>([]);
     const [etag, setEtag] = useState<string | null>(null);
     const [loadingImages, setLoadingImages] = useState(false);
 
     const [industries, setIndustries] = useState<any[]>([]);
     const [loadingIndustries, setLoadingIndustries] = useState(true);
+    const [selectedSubIndustry, setSelectedSubIndustry] = useState<string | null>(null);
+    const refreshImages = async () => {
+        setLoadingImages(true);
 
+        try {
+            let url = "https://ai-shoutly-backend.onrender.com/api/display-images";
+            if (selectedIndustry) {
+                url += `?industryId=${selectedIndustry}`;
+            }
+
+            // Reset cache so backend returns new random images
+            setEtag(null);
+
+            const res = await fetch(url);
+            const data = await res.json();
+
+            let imagesArray: any[] = [];
+
+            if (Array.isArray(data)) {
+                imagesArray = data;
+            } else if (Array.isArray(data.images)) {
+                imagesArray = data.images;
+            } else if (Array.isArray(data.data)) {
+                imagesArray = data.data;
+            }
+
+            setImages(imagesArray);
+        } catch (error) {
+            console.error("Refresh failed:", error);
+        } finally {
+            setLoadingImages(false);
+        }
+    };
     useEffect(() => {
         const fetchImages = async () => {
             setLoadingImages(true);
 
             try {
-                let url =
-                    "https://ai-shoutly-backend.onrender.com/api/display-images";
-
+                let url = "https://ai-shoutly-backend.onrender.com/api/display-images";
                 if (selectedIndustry) {
                     url += `?industryId=${selectedIndustry}`;
                 }
 
-                const res = await fetch(url, {
-                    headers: etag ? { "If-None-Match": etag } : {},
-                });
-
-                if (res.status === 304) {
-                    setLoadingImages(false);
-                    return;
-                }
-
-                const newEtag = res.headers.get("ETag");
-                if (newEtag) setEtag(newEtag);
-
+                const res = await fetch(url);
                 const data = await res.json();
 
-                setImages(data.images || []);
+                console.log("Images API response:", data);
+
+                // Normalize response
+                let imagesArray: any[] = [];
+
+                if (Array.isArray(data)) {
+                    imagesArray = data;
+                } else if (Array.isArray(data.images)) {
+                    imagesArray = data.images;
+                } else if (Array.isArray(data.data)) {
+                    imagesArray = data.data;
+                }
+
+                setImages(imagesArray);
             } catch (error) {
                 console.error("Failed to fetch images:", error);
             } finally {
@@ -110,7 +143,16 @@ export default function LandingPage() {
 
         fetchImages();
     }, [selectedIndustry]);
-
+    // store selected industry id or name
+    const [searchTerm, setSearchTerm] = useState(""); // store search input
+    // Filter images locally based on search input
+    const filteredImages = images.filter((img) => {
+        if (!searchTerm) return true;
+        return (
+            img.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            img.title?.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    });
     useEffect(() => {
         const fetchIndustries = async () => {
             try {
@@ -119,9 +161,22 @@ export default function LandingPage() {
                 );
 
                 const data = await res.json();
-                setIndustries(data);
+                console.log("API response:", data);
+
+                // Normalize API response
+                const industriesArray = Array.isArray(data)
+                    ? data
+                    : data?.industries || data?.data || [];
+
+                const formatted = industriesArray.map((ind: any) => ({
+                    id: ind.id,
+                    name: ind.name,
+                    subIndustries: ind.subIndustries || [],
+                }));
+
+                setIndustries(formatted);
             } catch (error) {
-                console.error("Failed to fetch industries:", error);
+                console.error("Industry fetch failed:", error);
             } finally {
                 setLoadingIndustries(false);
             }
@@ -129,6 +184,7 @@ export default function LandingPage() {
 
         fetchIndustries();
     }, []);
+    console.log("Industries state:", industries);
     return (
         <div className="relative bg-white dark:bg-gray-950 font-arial min-h-screen text-gray-900 dark:text-white selection:text-white overflow-hidden">
             {/* GLOBAL FLOATING AI + SOCIAL MEDIA BUBBLES */}
@@ -612,7 +668,7 @@ export default function LandingPage() {
                         >
                             {/* AI scanning light */}
                             <div
-                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none"
                             />
 
                             <div className="flex items-center gap-3 mb-5 sm:mb-6">
@@ -624,7 +680,17 @@ export default function LandingPage() {
                                 </h3>
                             </div>
                             <select
-                                onChange={(e) => setSelectedIndustry(e.target.value)}
+                                value={selectedIndustry}
+                                onChange={(e) => {
+                                    const id = e.target.value;
+                                    setSelectedIndustry(id);
+
+                                    const selected = industries.find(
+                                        (ind: any) => String(ind.id) === String(id)
+                                    );
+
+                                    setSubIndustries(selected?.subIndustries || []);
+                                }}
                                 className="w-full mb-6 sm:mb-8 px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black text-sm sm:text-base"
                             >
                                 <option value="">Choose your industry</option>
@@ -632,36 +698,55 @@ export default function LandingPage() {
                                 {loadingIndustries ? (
                                     <option>Loading industries...</option>
                                 ) : (
-                                    industries.map((industry) => (
+                                    industries.map((industry: any) => (
                                         <option key={industry.id} value={industry.id}>
                                             {industry.name}
-                                        </option>
-                                    ))
-                                )}
+                                        </option>)
+                                    ))}
                             </select>
 
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-                                {[
-                                    { emoji: "🏥", label: "Health" },
-                                    { emoji: "🍔", label: "Food" },
-                                    { emoji: "👗", label: "Fashion" },
-                                    { emoji: "🏠", label: "Real Estate" },
-                                    { emoji: "🎓", label: "Education" },
-                                    { emoji: "💰", label: "Finance" },
-                                ].map((item, i) => (
-                                    <div
-                                        className="border border-gray-200 rounded-xl sm:rounded-2xl py-4 sm:py-6 flex flex-col items-center justify-center hover:shadow-lg transition"
-                                    >
-                                        <span
-                                            className="text-xl sm:text-2xl mb-1 sm:mb-2"
-                                        >
-                                            {item.emoji}
-                                        </span>
-                                        <span className="text-xs sm:text-sm font-medium text-center">
-                                            {item.label}
-                                        </span>
-                                    </div>
-                                ))}
+                                {subIndustries.length === 0 ? (
+                                    <p className="text-sm text-gray-500 col-span-full text-center">
+                                        Select an industry to see sub-categories
+                                    </p>
+                                ) : (
+                                    subIndustries.map((sub, i) => {
+                                        const isActive = selectedSubIndustry === String(sub.id);
+
+                                        return (
+                                            <div
+                                                key={sub.id || i}
+                                                onClick={() => setSelectedSubIndustry(String(sub.id))}
+                                                className={`group cursor-pointer relative overflow-hidden rounded-xl sm:rounded-2xl p-4 sm:p-5 border transition-all duration-300
+                    ${isActive
+                                                        ? "border-black bg-gray-50 shadow-lg scale-[1.02]"
+                                                        : "border-gray-200 bg-white hover:shadow-xl hover:-translate-y-1"
+                                                    }`}
+                                            >
+                                                {/* Gradient hover glow */}
+                                                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition bg-gradient-to-br from-purple-100/40 via-transparent to-blue-100/40" />
+
+                                                {/* Icon bubble */}
+                                                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gray-100 flex items-center justify-center mb-2 sm:mb-3 mx-auto group-hover:bg-black group-hover:text-white transition">
+                                                    <span className="text-xs sm:text-sm">
+                                                        {i + 1}
+                                                    </span>
+                                                </div>
+
+                                                {/* Sub industry name */}
+                                                <span className="text-xs sm:text-sm text-center block text-gray-800 group-hover:text-black">
+                                                    {sub.name}
+                                                </span>
+
+                                                {/* Active indicator */}
+                                                {isActive && (
+                                                    <div className="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-black" />
+                                                )}
+                                            </div>
+                                        );
+                                    })
+                                )}
                             </div>
                         </div>
 
@@ -719,56 +804,37 @@ export default function LandingPage() {
             </section>
             <section className="py-14 sm:py-24 bg-white overflow-hidden">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6">
-
                     {/* Floating Badge */}
-                    <div
-                        className="flex justify-center mb-5 sm:mb-6"
-                    >
-                        <span
-                            className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 text-white text-xs sm:text-sm font-semibold shadow-lg"
-                        >
-                            <div
-
-                            >
-                                <SparklesIcon className="w-4 h-4 text-white" />
-                            </div>
+                    <div className="flex justify-center mb-5 sm:mb-6">
+                        <span className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 text-white text-xs sm:text-sm font-semibold shadow-lg">
+                            <SparklesIcon className="w-4 h-4 text-white" />
                             10,000+ Professional Templates
                         </span>
                     </div>
 
                     {/* Title */}
-                    <h2
-                        className="text-2xl sm:text-3xl md:text-5xl text-center text-black mb-3 sm:mb-4"
-                    >
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl text-center text-black mb-3 sm:mb-4">
                         Browse Our Library
                     </h2>
 
                     {/* Subtitle */}
-                    <p
-                        className="text-center text-gray-600 text-sm sm:text-base max-w-2xl mx-auto mb-10 sm:mb-16 px-2"
-                    >
+                    <p className="text-center text-gray-600 text-sm sm:text-base max-w-2xl mx-auto mb-10 sm:mb-16 px-2">
                         Industry-specific templates that update instantly based on your selection
                     </p>
 
                     {/* Main Card */}
-                    <div
-                        className="relative bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl border border-gray-200 overflow-hidden"
-                    >
-                        {/* subtle animated gradient sweep */}
-                        <div
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                        />
+                    <div className="relative bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl border border-gray-200 overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
 
                         {/* Top Controls */}
                         <div className="flex flex-col gap-6 mb-8 sm:mb-10 relative z-10">
-
                             {/* Tabs */}
                             <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
                                 {["Images", "Reels", "Festivals & Occasions"].map((tab, i) => (
                                     <button
-
+                                        key={i}
                                         className={`whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition
-              ${i === 0
+                    ${i === 0
                                                 ? "bg-black text-white shadow-lg"
                                                 : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-100"
                                             }`}
@@ -779,49 +845,62 @@ export default function LandingPage() {
                             </div>
 
                             {/* Search + Dropdown */}
-                            <div className="flex flex-col sm:flex-row gap-4">
+                            <div className="flex flex-col sm:flex-row gap-4 items-center">
                                 <input
-
                                     type="text"
                                     placeholder="Search templates"
                                     className="w-full px-4 py-2 rounded-xl bg-white text-gray-800 placeholder-gray-400 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 text-sm"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
                                 />
 
                                 <select
                                     className="w-full sm:w-auto px-4 py-2 rounded-xl bg-white text-gray-800 border border-gray-300 focus:outline-none text-sm"
+                                    value={selectedIndustry}
+                                    onChange={(e) => setSelectedIndustry(e.target.value)}
                                 >
-                                    <option>Food & Beverages</option>
-                                    <option>Health</option>
-                                    <option>Fashion</option>
-                                    <option>Real Estate</option>
-                                    <option>Education</option>
+                                    <option value="">All Industries</option>
+                                    {industries.map((industry: any) => (
+                                        <option key={industry.id} value={industry.id}>
+                                            {industry.name}
+                                        </option>
+                                    ))}
                                 </select>
+
+                                {/* Refresh Button */}
+                                <button
+                                    onClick={refreshImages}
+                                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-gray-300 text-gray-700 text-sm hover:bg-gray-100 hover:shadow-sm transition-all"
+                                >
+                                    <RefreshCcw
+                                        className={`w-4 h-4 text-gray-500 ${loadingImages ? "animate-spin" : ""}`}
+                                    />
+                                    Refresh
+                                </button>
                             </div>
                         </div>
 
                         {/* Templates Grid */}
-                        <div
-                            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 sm:gap-6 relative z-10"
-                        >
-                            {loadingImages ? (
-                                <p className="text-center col-span-full">Loading templates...</p>
-                            ) : images.length === 0 ? (
-                                <p className="text-center col-span-full">No templates found</p>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                            {filteredImages.length === 0 ? (
+                                <p className="col-span-full text-center text-gray-500">No images found</p>
                             ) : (
-                                images.map((img, i) => (
-                                    <div
-                                        key={img.id}
-                                        className="relative aspect-square rounded-xl sm:rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-xl transition-all"
-                                    >
-                                        <span className="absolute top-2 right-2 px-2 sm:px-3 py-1 rounded-full bg-white text-gray-400 text-[10px] sm:text-xs font-semibold shadow">
-                                            #{i + 1}
-                                        </span>
-
+                                filteredImages.map((img, index) => (
+                                    <div key={img.id || index} className="relative w-full h-48 rounded-xl overflow-hidden">
                                         <img
-                                            src={img.file}
-                                            alt="Template"
+                                            src={
+                                                img.file
+                                                    ? img.file.startsWith("http")
+                                                        ? img.file
+                                                        : `https://ai-shoutly-backend.onrender.com${img.file}`
+                                                    : img.url
+                                            }
+                                            alt={img.name || "Template"}
                                             className="w-full h-full object-cover rounded-xl sm:rounded-2xl"
                                         />
+                                        <span className="absolute bottom-2 left-2 text-white bg-black/50 px-2 py-1 text-xs rounded">
+                                            {img.name}
+                                        </span>
                                     </div>
                                 ))
                             )}
