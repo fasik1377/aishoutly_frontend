@@ -52,7 +52,7 @@ export default function CreatePasswordPage() {
                     <input
                         type={showPassword ? "text" : "password"}
                         placeholder="8 symbols at least"
-                        className="w-full px-4 py-3 border font-arial border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black pr-12"
+                        className="w-full px-4 py-3 border font-arial border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black pr-12 text-black"
                     />
                     <button
                         type="button"
@@ -75,7 +75,7 @@ export default function CreatePasswordPage() {
                     <input
                         type={showConfirmPassword ? "text" : "password"}
                         placeholder="8 symbols at least"
-                        className="w-full px-4 py-3 border font-arial border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black pr-12"
+                        className="w-full px-4 py-3 border font-arial border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black pr-12 text-black"
                     />
                     <button
                         type="button"

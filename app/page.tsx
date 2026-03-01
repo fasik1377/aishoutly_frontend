@@ -194,7 +194,7 @@ export default function LandingPage() {
                     const startY = Math.random() * 100;
 
                     return (
-                        <div
+                        <div key={i}
                             className="absolute"
                         >
                             <div className="text-gray-400/30 text-2xl md:text-3xl bg-white/40 backdrop-blur-md p-4 rounded-full shadow-lg">
@@ -554,7 +554,7 @@ export default function LandingPage() {
                             { label: "AI Generates", color: "bg-pink-500" },
                             { label: "Auto Schedule", color: "bg-green-500" },
                         ].map((step, index) => (
-                            <div
+                            <div key={index}
                                 className="flex items-center gap-3"
                             >
                                 <div className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-300 text-xs sm:text-sm font-medium text-black bg-gray-100 shadow-sm backdrop-blur-md">
@@ -611,7 +611,7 @@ export default function LandingPage() {
                             { emoji: "📅", title: "365 Days Filled" },
                             { emoji: "🌍", title: "Multi-Platform" },
                         ].map((item) => (
-                            <div
+                            <div key={item.title}
                                 className="bg-gray-100 border border-gray-200 rounded-2xl p-6 sm:p-8 text-center shadow-sm hover:shadow-xl transition-all"
                             >
                                 <div
@@ -959,7 +959,7 @@ export default function LandingPage() {
                             { title: "Beauty, Salon & Wellness", emoji: "💅" },
                             { title: "Retail & E-Commerce", emoji: "🛒" },
                         ].map((item, index) => (
-                            <div
+                            <div key={item.title || index}
                                 className="rounded-3xl p-6 bg-white border border-gray-200 text-left cursor-pointer relative overflow-hidden"
                             >
                                 {/* Emoji with micro-pulse */}
