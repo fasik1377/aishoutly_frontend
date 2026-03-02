@@ -246,9 +246,9 @@ export default function LandingPage() {
                         <div className="relative group">
                             <span className="cursor-pointer">Company</span>
                             <div className="absolute top-full left-0 mt-2 w-44 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
-                                <Link href="/about" className="block px-4 py-2 hover:bg-gray-100">About Us</Link>
-                                <Link href="/contact" className="block px-4 py-2 hover:bg-gray-100">Contact</Link>
-                                <Link href="/press" className="block px-4 py-2 hover:bg-gray-100">Press</Link>
+                                <Link href="/about-us" className="block px-4 py-2 hover:bg-gray-100">About Us</Link>
+                                <Link href="/contact-us" className="block px-4 py-2 hover:bg-gray-100">Contact</Link>
+                                <Link href="/press-media" className="block px-4 py-2 hover:bg-gray-100">Press</Link>
                                 <Link href="/careers" className="block px-4 py-2 hover:bg-gray-100">Careers</Link>
                             </div>
                         </div>
@@ -1176,7 +1176,7 @@ export default function LandingPage() {
                             <li><Link href="#" className="hover:text-white transition">How It Works</Link></li>
                             <li><Link href="#" className="hover:text-white transition">10k+ Templates</Link></li>
                             <li><Link href="#" className="hover:text-white transition">Platforms</Link></li>
-                            <li><Link href="#" className="hover:text-white transition">Plans & Pricing</Link></li>
+                            <li><Link href="/pricing" className="hover:text-white transition">Plans & Pricing</Link></li>
                         </ul>
                     </div>
 
@@ -1185,10 +1185,10 @@ export default function LandingPage() {
                         <h4 className="font-semibold text-white mb-2">Resources</h4>
                         <ul className="space-y-2 text-sm">
                             <li><Link href="#" className="hover:text-white transition">Blog</Link></li>
-                            <li><Link href="#" className="hover:text-white transition">Help Center</Link></li>
-                            <li><Link href="#" className="hover:text-white transition">Join Community</Link></li>
+                            <li><Link href="/help-center" className="hover:text-white transition">Help Center</Link></li>
+                            <li><Link href="/join-community" className="hover:text-white transition">Join Community</Link></li>
                             <li><Link href="#" className="hover:text-white transition">Success Stories</Link></li>
-                            <li><Link href="#" className="hover:text-white transition">Free Editorial Calendar</Link></li>
+                            <li><Link href="/editorial-calendar" className="hover:text-white transition">Free Editorial Calendar</Link></li>
                             <li><Link href="#" className="hover:text-white transition">Industry Content Guides</Link></li>
                         </ul>
                     </div>
@@ -1197,11 +1197,15 @@ export default function LandingPage() {
                     <div className="md:col-span-1">
                         <h4 className="font-semibold text-white mb-2">Company</h4>
                         <ul className="space-y-2 text-sm">
-                            <li><Link href="#" className="hover:text-white transition">About Us</Link></li>
-                            <li><Link href="#" className="hover:text-white transition">Contact Us</Link></li>
-                            <li><Link href="#" className="hover:text-white transition">Press & Media</Link></li>
-                            <li><Link href="#" className="hover:text-white transition">Join Our Team</Link></li>
-                            <li><Link href="#" className="hover:text-white transition">Affiliate Program</Link></li>
+                            <li>
+                                <Link href="/about-us" className="hover:text-white transition">
+                                    About Us
+                                </Link>
+                            </li>
+                            <li><Link href="/contact-us" className="hover:text-white transition">Contact Us</Link></li>
+                            <li><Link href="/press-media" className="hover:text-white transition">Press & Media</Link></li>
+                            <li><Link href="/careers" className="hover:text-white transition">Join Our Team</Link></li>
+                            <li><Link href="/affiliate-program" className="hover:text-white transition">Affiliate Program</Link></li>
                         </ul>
                     </div>
 
